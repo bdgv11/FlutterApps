@@ -52,16 +52,60 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Column(
                   children: const [
+                    Text('Contrasena: '),
                     TextField(
-                        decoration: InputDecoration(
-                      hintText: 'CONTRASENA',
-                    )),
+                      decoration: InputDecoration(
+                        hintText: 'CONTRASENA',
+                      ),
+                      obscureText: true,
+                    ),
                     Padding(padding: EdgeInsets.all(8)),
+                    Text('Datetime:'),
                     TextField(
                       decoration: InputDecoration(
                         hintText: 'DATETIME',
                       ),
                       keyboardType: TextInputType.datetime,
+                    ),
+                    Padding(padding: EdgeInsets.all(8)),
+                    Text('Email:'),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Email address',
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    Padding(padding: EdgeInsets.all(8)),
+                    Text('Multiline:'),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Multiline',
+                      ),
+                      keyboardType: TextInputType.multiline,
+                    ),
+                    Padding(padding: EdgeInsets.all(8)),
+                    Text('Numeros:'),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Numeros',
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                    Padding(padding: EdgeInsets.all(8)),
+                    Text('Numeros telefonico:'),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Numeros telefonico',
+                      ),
+                      keyboardType: TextInputType.phone,
+                    ),
+                    Padding(padding: EdgeInsets.all(8)),
+                    Text('URL'),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: 'URL',
+                      ),
+                      keyboardType: TextInputType.url,
                     ),
                   ],
                 ),
