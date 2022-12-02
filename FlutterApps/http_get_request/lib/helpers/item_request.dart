@@ -12,6 +12,22 @@ class RequestItem implements HTTPRequest<Item> {
   Future<Item> execute() async {
     final response = await http.get(Uri.parse(url));
 
+    /*final responsePost = await http.post(
+      Uri.parse(url),
+      body: 'Texto que va en el body',
+      encoding: Encoding.getByName('utf-8'),
+      headers: {'Authentication': token},
+    );
+    final headers = response.headers;
+    final responseLength = response.contentLength;*/
+
+    final client = http.Client();
+
+    client.get(Uri.parse(url));
+    client.get(Uri.parse(url));
+    client.get(Uri.parse(url));
+    client.close();
+
     if (response.statusCode != 200) {
       throw http.ClientException('Error con los datos');
     }

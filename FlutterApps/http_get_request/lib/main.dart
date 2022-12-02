@@ -8,7 +8,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final request =
-      const RequestItem(url: 'https://jsonplaceholder.typicode.com/posts/1');
+      const RequestItem(url: 'https://jsonplaceholder.typicode.com/posts/10');
   const MyApp();
 
   @override
