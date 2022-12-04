@@ -13,7 +13,7 @@ class ContadorProvider with ChangeNotifier {
   ContadorProvider(this._contador);
 
   void increment() {
-    _contador++;
+    _contador = contador + 15;
     notifyListeners();
   }
 }

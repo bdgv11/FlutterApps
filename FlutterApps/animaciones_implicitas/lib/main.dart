@@ -1,5 +1,7 @@
-import 'package:animaciones_implicitas/widgets/animated_container_widget.dart';
+import 'package:animaciones_implicitas/widgets/animated_align_widget.dart';
+import 'package:animaciones_implicitas/widgets/animated_container_widget2.dart';
 import 'package:animaciones_implicitas/widgets/increment_widget.dart';
+import 'package:animaciones_implicitas/widgets/text_style_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/contador_providers.dart';
@@ -23,12 +25,12 @@ class MyApp extends StatelessWidget {
         create: (_) => ContadorProvider(20),
         child: Scaffold(
           appBar: AppBar(
-            title: Text('App animated container'),
+            title: const Text('App animated container'),
           ),
-          body: Center(
-            child: AnimatedContainerWidget(),
+          body: const Center(
+            child: AnimatedTextStyleWidget(),
           ),
-          floatingActionButton: IncrementWidget(),
+          floatingActionButton: const IncrementWidget(),
         ),
       ),
     );
