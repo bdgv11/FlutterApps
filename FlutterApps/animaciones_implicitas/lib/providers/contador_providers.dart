@@ -2,11 +2,11 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class ContadorProvider with ChangeNotifier {
-  int _contador;
+  double _contador;
 
-  int get contador => _contador;
+  double get contador => _contador;
 
-  set contador(int value) {
+  set contador(double value) {
     _contador = value;
   }
 
