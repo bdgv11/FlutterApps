@@ -50,7 +50,8 @@ class _MyWidgetState extends State<LoginBarberShop> {
         body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("Assets/Images/login3.jpeg"),
+                opacity: 0.8,
+                image: AssetImage("Assets/Images/login7.jpeg"),
                 fit: BoxFit.cover),
           ),
           child: FutureBuilder(
@@ -82,8 +83,9 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                 //fillColor: Colors.teal.withOpacity(.08),
                                 hintText: 'Correo electrónico',
                                 errorStyle: const TextStyle(
-                                    color: Colors.teal,
-                                    fontWeight: FontWeight.bold),
+                                  color: Colors.teal,
+                                  fontWeight: FontWeight.bold,
+                                ),
                                 hintStyle: const TextStyle(
                                   color: Colors.white,
                                 ),

@@ -28,6 +28,22 @@ class Validator {
     return null;
   }
 
+  static String? validatePhoneNumber({required String phone}) {
+    if (phone == null) {
+      return null;
+    }
+
+    RegExp phoneRE = RegExp((r"^(?:[+0]9)?[0-9]{8}$"));
+
+    if (phone.isEmpty) {
+      return 'El numero telefónico no puede estar vacío';
+    } else if (!phoneRE.hasMatch(phone)) {
+      return 'Ingresar un numero telefónico válido';
+    }
+
+    return null;
+  }
+
   static String? validatePassword({required String password}) {
     if (password == null) {
       return null;

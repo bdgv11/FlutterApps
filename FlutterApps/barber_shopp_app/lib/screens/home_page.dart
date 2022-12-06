@@ -29,7 +29,7 @@ class _MyWidgetState extends State<HomePageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User page'),
+        title: const Text('Home Page'),
       ),
       body: Center(
         child: Column(
