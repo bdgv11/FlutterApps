@@ -62,6 +62,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     key: _formKey,
                     child: Column(
                       children: [
+                        const Text(
+                          'Registro',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontFamily: 'Barlow',
+                          ),
+                        ),
+                        const Padding(padding: EdgeInsets.all(8)),
                         TextFormField(
                           style: const TextStyle(color: Colors.white),
                           validator: (value) => Validator.validateName(
