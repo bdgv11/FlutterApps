@@ -1,5 +1,3 @@
-/// A stateful widget that contains a form that has two text fields, one for the email and one for the
-/// password. It also has two buttons, one for logging in and one for registering
 import 'package:barber_shopp_app/screens/home_page.dart';
 import 'package:barber_shopp_app/screens/register_page.dart';
 import 'package:barber_shopp_app/utils/firebase_authentication.dart';
@@ -7,6 +5,7 @@ import 'package:barber_shopp_app/utils/validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginBarberShop extends StatefulWidget {
   const LoginBarberShop({super.key});
@@ -27,9 +26,6 @@ class _MyWidgetState extends State<LoginBarberShop> {
   /// A key that is used to identify the form and validate the form.
   final _formKey = GlobalKey<FormState>();
 
-  //
-  String _textoAlCambiar = '';
-
   bool _processingLogIn = false;
 
   @override
@@ -40,97 +36,77 @@ class _MyWidgetState extends State<LoginBarberShop> {
         _focusPassword.unfocus();
       },
       child: Scaffold(
-        /*appBar: AppBar(
-          backgroundColor: Colors.lightGreen,
-          title: const Text(
-            'Barber Shop',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),*/
         body: Container(
           decoration: const BoxDecoration(
-            image: DecorationImage(
-                opacity: 0.8,
-                image: AssetImage("Assets/Images/login7.jpeg"),
-                fit: BoxFit.cover),
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Colors.black,
+                Color.fromARGB(255, 48, 26, 79),
+                Color.fromARGB(255, 20, 154, 140),
+              ],
+            ),
           ),
           child: FutureBuilder(
             future: _initFirebase(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Padding(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: const EdgeInsets.all(24),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Form(
                         key: _formKey,
                         child: Column(
                           children: [
+                            const Text(
+                              'Bienvenido, inicia sesión para continuar.',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  fontFamily: 'Barlow'),
+                            ),
+                            const Padding(padding: EdgeInsets.all(30)),
                             TextFormField(
                               style: const TextStyle(color: Colors.white),
                               validator: (value) => Validator.validateEmail(
                                   email: _emailFieldController.text),
                               controller: _emailFieldController,
                               focusNode: _focusEmail,
-                              decoration: InputDecoration(
-                                icon: const Icon(
-                                  Icons.person,
-                                  size: 25,
-                                  color: Colors.white,
-                                ),
-                                //filled: true,
-                                //fillColor: Colors.teal.withOpacity(.08),
+                              decoration: const InputDecoration(
                                 hintText: 'Correo electrónico',
-                                errorStyle: const TextStyle(
+                                errorStyle: TextStyle(
                                   color: Colors.teal,
                                   fontWeight: FontWeight.bold,
                                 ),
-                                hintStyle: const TextStyle(
-                                  color: Colors.white,
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide: const BorderSide(
-                                    color: Colors.teal,
-                                    width: 2,
-                                  ),
-                                ),
+                                hintStyle: TextStyle(
+                                    color: Colors.white, fontFamily: 'Barlow'),
                               ),
                             ),
-                            const Padding(padding: EdgeInsets.all(8)),
+                            const Padding(padding: EdgeInsets.all(20)),
                             TextFormField(
                               style: const TextStyle(color: Colors.white),
                               validator: (value) => Validator.validatePassword(
                                   password: _passwordFieldController.text),
                               controller: _passwordFieldController,
                               focusNode: _focusPassword,
+                              // ignore: prefer_const_constructors
                               decoration: InputDecoration(
-                                //filled: true,
-                                //fillColor: Colors.teal.withOpacity(.08),
                                 hintText: 'Contraseña',
                                 errorStyle: const TextStyle(
                                     color: Colors.teal,
                                     fontWeight: FontWeight.bold),
                                 hintStyle: const TextStyle(
-                                  color: Colors.white,
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide: const BorderSide(
-                                      color: Colors.teal, width: 2),
-                                ),
-                                icon: const Icon(
-                                  Icons.key,
-                                  size: 25,
-                                  color: Colors.white,
-                                ),
+                                    color: Colors.white, fontFamily: 'Barlow'),
                               ),
                               obscureText: true,
                             )
                           ],
                         ),
                       ),
+                      const Padding(padding: EdgeInsets.all(20)),
                       _processingLogIn
                           ? const CircularProgressIndicator()
                           : Row(
@@ -140,9 +116,9 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       elevation: 30,
-                                      backgroundColor: Colors.teal,
+                                      backgroundColor: Colors.white,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(20),
                                       ),
                                     ),
                                     onPressed: () async {
@@ -180,42 +156,65 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                             builder: (context) =>
                                                 HomePageScreen(user: user),
                                           ));
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              backgroundColor: Color.fromARGB(
+                                                  255, 20, 154, 140),
+                                              content: Text(
+                                                'Correo NO existe o contrasena incorrecta',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontSize: 25,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily: 'Barlow'),
+                                              ),
+                                            ),
+                                          );
                                         }
                                       }
                                     },
                                     child: const Text(
                                       'Iniciar Sesión',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                                const Padding(padding: EdgeInsets.all(8)),
-                                Expanded(
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 100,
-                                      backgroundColor:
-                                          Colors.teal.withOpacity(0.8),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              RegisterScreen(),
-                                        ),
-                                      );
-                                    },
-                                    child: const Text(
-                                      'Registrarse',
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 120, 43, 132),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Barlow'),
                                     ),
                                   ),
                                 ),
                               ],
                             ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            '¿No tienes cuenta? ',
+                            style: TextStyle(
+                                color: Colors.white54, fontFamily: 'Barlow'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => RegisterScreen(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'Registrate',
+                              style: GoogleFonts.barlow(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ],
                   ),
                 );

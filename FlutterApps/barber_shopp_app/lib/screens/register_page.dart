@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../utils/firebase_authentication.dart';
 
@@ -41,11 +42,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         },
         child: Container(
           decoration: const BoxDecoration(
-            image: DecorationImage(
-              opacity: 0.8,
-              image: AssetImage("Assets/Images/logo6.webp"),
-              fit: BoxFit.cover,
-              alignment: Alignment.topCenter,
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Colors.black,
+                Color.fromARGB(255, 48, 26, 79),
+                Color.fromARGB(255, 20, 154, 140),
+              ],
             ),
           ),
           child: Padding(
@@ -64,29 +68,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               name: _nameFieldController.text),
                           controller: _nameFieldController,
                           focusNode: _focusName,
-                          decoration: InputDecoration(
-                            icon: const Icon(
+                          decoration: const InputDecoration(
+                            icon: Icon(
                               Icons.person,
                               size: 25,
                               color: Colors.white,
                             ),
                             hintText: 'Nombre',
-                            errorStyle: const TextStyle(
+                            errorStyle: TextStyle(
                               color: Colors.teal,
                               fontWeight: FontWeight.bold,
                             ),
-                            hintStyle: const TextStyle(
+                            hintStyle: TextStyle(
                               color: Colors.white,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25),
-                              borderSide: const BorderSide(
-                                color: Colors.teal,
-                                width: 2,
-                              ),
                             ),
                           ),
                         ),
+                        const Padding(padding: EdgeInsets.all(8)),
                         const SizedBox(height: 8),
                         TextFormField(
                           style: const TextStyle(color: Colors.white),
@@ -94,29 +92,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               email: _emailFieldController.text),
                           controller: _emailFieldController,
                           focusNode: _focusEmail,
-                          decoration: InputDecoration(
-                            icon: const Icon(
+                          decoration: const InputDecoration(
+                            icon: Icon(
                               Icons.email,
                               size: 25,
                               color: Colors.white,
                             ),
                             hintText: 'Correo Electrónico',
-                            errorStyle: const TextStyle(
+                            errorStyle: TextStyle(
                               color: Colors.teal,
                               fontWeight: FontWeight.bold,
                             ),
-                            hintStyle: const TextStyle(
+                            hintStyle: TextStyle(
                               color: Colors.white,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25),
-                              borderSide: const BorderSide(
-                                color: Colors.teal,
-                                width: 2,
-                              ),
                             ),
                           ),
                         ),
+                        const Padding(padding: EdgeInsets.all(8)),
                         const SizedBox(height: 8),
                         TextFormField(
                           style: const TextStyle(color: Colors.white),
@@ -124,26 +116,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               password: _passwordFieldController.text),
                           controller: _passwordFieldController,
                           focusNode: _focusPassword,
-                          decoration: InputDecoration(
-                            icon: const Icon(
+                          decoration: const InputDecoration(
+                            icon: Icon(
                               Icons.key,
                               size: 25,
                               color: Colors.white,
                             ),
                             hintText: 'Contraseña',
-                            errorStyle: const TextStyle(
+                            errorStyle: TextStyle(
                               color: Colors.teal,
                               fontWeight: FontWeight.bold,
                             ),
-                            hintStyle: const TextStyle(
+                            hintStyle: TextStyle(
                               color: Colors.white,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25),
-                              borderSide: const BorderSide(
-                                color: Colors.teal,
-                                width: 2,
-                              ),
                             ),
                           ),
                           obscureText: true,
@@ -151,6 +136,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ],
                     ),
                   ),
+                  const Padding(padding: EdgeInsets.all(20)),
                   const SizedBox(height: 8),
                   _processing
                       ? const CircularProgressIndicator()
@@ -161,9 +147,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   elevation: 100,
-                                  backgroundColor: Colors.teal.withOpacity(0.8),
+                                  backgroundColor: Colors.white,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(20),
                                   ),
                                 ),
                                 onPressed: () async {
@@ -194,17 +180,63 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               HomePageScreen(user: user),
                                         ),
                                       );
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          backgroundColor:
+                                              Color.fromARGB(255, 20, 154, 140),
+                                          content: Text(
+                                            'Correo en uso',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Barlow'),
+                                          ),
+                                        ),
+                                      );
                                     }
                                   }
                                 },
                                 child: const Text(
                                   'Registrarse',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 120, 43, 132),
+                                  ),
                                 ),
                               ),
                             ),
                           ],
                         ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        '¿Ya tienes cuenta? ',
+                        style: TextStyle(
+                            color: Colors.white54, fontFamily: 'Barlow'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => LoginBarberShop(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Inicia Sesion',
+                          style: GoogleFonts.barlow(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
             ),
