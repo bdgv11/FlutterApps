@@ -1,6 +1,5 @@
 /// A stateful widget that contains a form that has two text fields, one for the email and one for the
 /// password. It also has two buttons, one for logging in and one for registering
-9
 import 'package:barber_shopp_app/screens/home_page.dart';
 import 'package:barber_shopp_app/screens/register_page.dart';
 import 'package:barber_shopp_app/utils/firebase_authentication.dart';
@@ -27,6 +26,9 @@ class _MyWidgetState extends State<LoginBarberShop> {
 
   /// A key that is used to identify the form and validate the form.
   final _formKey = GlobalKey<FormState>();
+
+  //
+  String _textoAlCambiar = '';
 
   bool _processingLogIn = false;
 
@@ -65,6 +67,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                         child: Column(
                           children: [
                             TextFormField(
+                              style: const TextStyle(color: Colors.white),
                               validator: (value) => Validator.validateEmail(
                                   email: _emailFieldController.text),
                               controller: _emailFieldController,
@@ -75,31 +78,46 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                   size: 25,
                                   color: Colors.white,
                                 ),
-                                hintText: 'Email',
+                                //filled: true,
+                                //fillColor: Colors.teal.withOpacity(.08),
+                                hintText: 'Correo electrónico',
+                                errorStyle: const TextStyle(
+                                    color: Colors.teal,
+                                    fontWeight: FontWeight.bold),
                                 hintStyle: const TextStyle(
                                   color: Colors.white,
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(25),
                                   borderSide: const BorderSide(
-                                      color: Colors.amber, width: 2),
+                                    color: Colors.teal,
+                                    width: 2,
+                                  ),
                                 ),
                               ),
                             ),
                             const Padding(padding: EdgeInsets.all(8)),
                             TextFormField(
+                              style: const TextStyle(color: Colors.white),
                               validator: (value) => Validator.validatePassword(
                                   password: _passwordFieldController.text),
                               controller: _passwordFieldController,
                               focusNode: _focusPassword,
                               decoration: InputDecoration(
-                                hintText: 'Password',
+                                //filled: true,
+                                //fillColor: Colors.teal.withOpacity(.08),
+                                hintText: 'Contraseña',
+                                errorStyle: const TextStyle(
+                                    color: Colors.teal,
+                                    fontWeight: FontWeight.bold),
+                                hintStyle: const TextStyle(
+                                  color: Colors.white,
+                                ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(25),
                                   borderSide: const BorderSide(
-                                      color: Colors.amber, width: 2),
+                                      color: Colors.teal, width: 2),
                                 ),
-                                hintStyle: const TextStyle(color: Colors.white),
                                 icon: const Icon(
                                   Icons.key,
                                   size: 25,
@@ -120,8 +138,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       elevation: 30,
-                                      backgroundColor: Colors.amber,
-                                      shadowColor: Colors.amberAccent,
+                                      backgroundColor: Colors.teal,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
                                       ),
@@ -165,7 +182,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                       }
                                     },
                                     child: const Text(
-                                      'Log In',
+                                      'Iniciar Sesión',
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ),
@@ -175,8 +192,8 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       elevation: 100,
-                                      backgroundColor: Colors.amber,
-                                      shadowColor: Colors.amberAccent,
+                                      backgroundColor:
+                                          Colors.teal.withOpacity(0.8),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
                                       ),
@@ -190,7 +207,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                       );
                                     },
                                     child: const Text(
-                                      'Register',
+                                      'Registrarse',
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ),

@@ -16,9 +16,9 @@ class FirebaseAuthentication {
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('Not existing email');
+        print('Email no existe');
       } else if (e.code == 'wrong-password') {
-        print('Password incorrect');
+        print('Contraseña incorrecta');
       }
     }
     return user;
@@ -44,9 +44,9 @@ class FirebaseAuthentication {
       //
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('Warning: Weak password!');
+        print('Advertencia: contraseña muy débil');
       } else if (e.code == 'email-already-in-use') {
-        print('Error: Email already in use.');
+        print('Error: Correo ya está en uso');
       }
     } catch (e) {
       print(e);
