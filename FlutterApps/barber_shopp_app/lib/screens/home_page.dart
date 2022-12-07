@@ -1,5 +1,7 @@
 /// A class that extends the StatefulWidget class and has a State class that extends the State class
 import 'package:barber_shopp_app/screens/login_barber_shop.dart';
+import 'package:barber_shopp_app/widgets/bottom_navigation.dart';
+import 'package:barber_shopp_app/widgets/drawer_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -28,83 +30,116 @@ class _MyWidgetState extends State<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [
-                Colors.black,
-                Color.fromARGB(255, 48, 26, 79),
-                Color.fromARGB(255, 20, 154, 140),
-              ],
+      appBar: AppBar(backgroundColor: Colors.black87),
+      drawer: DrawerUserWidget(user: _user),
+      body: Stack(
+        children: [
+          IconButton(
+            onPressed: () {
+              Scaffold.of(context).openEndDrawer();
+            },
+            icon: const Icon(Icons.menu, color: Colors.white),
+            color: Colors.white,
+          ),
+          Center(
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Colors.black,
+                    Color.fromARGB(255, 48, 26, 79),
+                    Color.fromARGB(255, 20, 154, 140),
+                  ],
+                ),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Padding(padding: EdgeInsets.all(8)),
+                  Text(
+                    'Nombre: ${_user.displayName}',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontFamily: 'Barlow-Thin',
+                        color: Colors.white,
+                        fontSize: 34),
+                  ),
+                  const Padding(padding: EdgeInsets.all(8)),
+                  Text(
+                    'Correo: ${_user.email}',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontFamily: 'Barlow-Thin', color: Colors.white),
+                  ),
+                  const Padding(padding: EdgeInsets.all(8)),
+                  _user.emailVerified
+                      ? const Text(
+                          'Email verificado!',
+                          style: TextStyle(
+                              color: Colors.green, fontFamily: 'Barlow-Thin'),
+                        )
+                      : const Text(
+                          'Email NO verificado!',
+                          style: TextStyle(
+                              color: Colors.red, fontFamily: 'Barlow-Thin'),
+                        ),
+                  const Padding(padding: EdgeInsets.all(8)),
+                  _user.emailVerified
+                      ? Container()
+                      : _isSendingVerification
+                          ? const CircularProgressIndicator()
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    setState(() {
+                                      _isSendingVerification = true;
+                                    });
+
+                                    await _user.sendEmailVerification();
+
+                                    setState(() {
+                                      _isSendingVerification = false;
+                                    });
+                                  },
+                                  child: const Text('Verificar Email'),
+                                ),
+                              ],
+                            ),
+                  _isSignOut
+                      ? const CircularProgressIndicator()
+                      : ElevatedButton(
+                          onPressed: () async {
+                            setState(() {
+                              _isSignOut = true;
+                            });
+
+                            FirebaseAuth.instance.signOut();
+
+                            setState(() {
+                              _isSignOut = false;
+                            });
+
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => const LoginBarberShop(),
+                              ),
+                            );
+                          },
+                          child: const Text('Sign Out!'),
+                        ),
+                ],
+              ),
             ),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'NAME: ${_user.displayName}',
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Text(
-                'EMAIL: ${_user.email}',
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              _user.emailVerified
-                  ? const Text('Email verificado!',
-                      style: TextStyle(color: Colors.green))
-                  : const Text('Email NO verificado!',
-                      style: TextStyle(color: Colors.red)),
-              _user.emailVerified
-                  ? Container()
-                  : _isSendingVerification
-                      ? const CircularProgressIndicator()
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () async {
-                                setState(() {
-                                  _isSendingVerification = true;
-                                });
-
-                                await _user.sendEmailVerification();
-
-                                setState(() {
-                                  _isSendingVerification = false;
-                                });
-                              },
-                              child: const Text('Verificar Email'),
-                            ),
-                          ],
-                        ),
-              _isSignOut
-                  ? const CircularProgressIndicator()
-                  : ElevatedButton(
-                      onPressed: () async {
-                        setState(() {
-                          _isSignOut = true;
-                        });
-
-                        FirebaseAuth.instance.signOut();
-
-                        setState(() {
-                          _isSignOut = false;
-                        });
-
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => const LoginBarberShop(),
-                          ),
-                        );
-                      },
-                      child: const Text('Sign Out!'),
-                    ),
-            ],
-          ),
-        ),
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomNavigationWidget(
+        user: _user,
       ),
     );
   }

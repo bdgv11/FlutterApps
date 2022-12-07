@@ -4,9 +4,9 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget{
+class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Scaffold App',
       debugShowCheckedModeBanner: false,
@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget{
   }
 }
 
-class MyHomePage extends StatefulWidget{
-  MyHomePage({Key? key, this.title}):super(key:key);
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -24,34 +24,32 @@ class MyHomePage extends StatefulWidget{
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>{
-
+class _MyHomePageState extends State<MyHomePage> {
   Icon _corazon = Icon(Icons.favorite_border, color: Colors.white);
   bool _corazon_liked = true;
 
   @override
-  Widget build (BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: (Text(widget.title!)),
         actions: [
           IconButton(
-              onPressed: (){_liked();},
+              onPressed: () {
+                _liked();
+              },
               icon: _corazon)
         ],
       ),
       drawer: Drawer(
         child: Column(
           children: const [
-            DrawerHeader(child: Text(
+            DrawerHeader(
+                child: Text(
               'Menu Drawer',
               style: TextStyle(
-                color: Colors.red,
-                fontSize: 25,
-                fontWeight: FontWeight.bold
-              ),
-              )
-            ),
+                  color: Colors.red, fontSize: 25, fontWeight: FontWeight.bold),
+            )),
             Text('Enlace 1'),
             Text('Enlace 2'),
             Text('Enlace 3')
@@ -59,7 +57,9 @@ class _MyHomePageState extends State<MyHomePage>{
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){_liked();},
+        onPressed: () {
+          _liked();
+        },
         backgroundColor: Colors.greenAccent,
         child: _corazon,
         //label: Text('Like!'),
@@ -71,18 +71,17 @@ class _MyHomePageState extends State<MyHomePage>{
         child: Container(
           height: 50,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround, //Esto acomoda con el mismo espacio a los iconos
+            mainAxisAlignment: MainAxisAlignment
+                .spaceEvenly, //Esto acomoda con el mismo espacio a los iconos
             children: const [
               IconButton(
                   onPressed: null,
                   icon: Icon(Icons.camera_alt_rounded),
-                  color: Colors.white
-              ),
+                  color: Colors.white),
               IconButton(
                   onPressed: null,
                   icon: Icon(Icons.phone_callback),
-                  color: Colors.white
-              )
+                  color: Colors.white)
             ],
           ),
         ),
@@ -90,12 +89,12 @@ class _MyHomePageState extends State<MyHomePage>{
     );
   }
 
-  _liked(){
-    setState((){
-      if(_corazon_liked){
+  _liked() {
+    setState(() {
+      if (_corazon_liked) {
         _corazon = Icon(Icons.favorite_border, color: Colors.white);
         _corazon_liked = false;
-      }else{
+      } else {
         _corazon = Icon(Icons.favorite, color: Colors.white);
         _corazon_liked = true;
       }

@@ -64,9 +64,10 @@ class _MyWidgetState extends State<LoginBarberShop> {
                             const Text(
                               'Bienvenido, inicia sesión para continuar.',
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  fontFamily: 'Barlow'),
+                                color: Colors.white,
+                                fontSize: 34,
+                                fontFamily: 'Barlow-Thin',
+                              ),
                             ),
                             const Padding(padding: EdgeInsets.all(30)),
                             TextFormField(
@@ -82,7 +83,8 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                   fontWeight: FontWeight.bold,
                                 ),
                                 hintStyle: TextStyle(
-                                    color: Colors.white, fontFamily: 'Barlow'),
+                                    color: Colors.white,
+                                    fontFamily: 'Barlow-Thin'),
                               ),
                             ),
                             const Padding(padding: EdgeInsets.all(20)),
@@ -99,10 +101,28 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                     color: Colors.teal,
                                     fontWeight: FontWeight.bold),
                                 hintStyle: const TextStyle(
-                                    color: Colors.white, fontFamily: 'Barlow'),
+                                    color: Colors.white,
+                                    fontFamily: 'Barlow-Thin'),
                               ),
                               obscureText: true,
-                            )
+                            ),
+                            /*TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => RegisterScreen(),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                'Olvidé contraseña',
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                    color: Colors.white54,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Barlow-Thin'),
+                              ),
+                            )*/
                           ],
                         ),
                       ),
@@ -168,7 +188,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                                 style: TextStyle(
                                                     fontSize: 25,
                                                     fontWeight: FontWeight.bold,
-                                                    fontFamily: 'Barlow'),
+                                                    fontFamily: 'Barlow-Thin'),
                                               ),
                                             ),
                                           );
@@ -181,7 +201,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                           color:
                                               Color.fromARGB(255, 120, 43, 132),
                                           fontWeight: FontWeight.bold,
-                                          fontFamily: 'Barlow'),
+                                          fontFamily: 'Barlow-Thin'),
                                     ),
                                   ),
                                 ),
@@ -193,7 +213,8 @@ class _MyWidgetState extends State<LoginBarberShop> {
                           const Text(
                             '¿No tienes cuenta? ',
                             style: TextStyle(
-                                color: Colors.white54, fontFamily: 'Barlow'),
+                                color: Colors.white54,
+                                fontFamily: 'Barlow-Thin'),
                           ),
                           TextButton(
                             onPressed: () {
@@ -203,14 +224,12 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                 ),
                               );
                             },
-                            child: Text(
+                            child: const Text(
                               'Registrate',
-                              style: GoogleFonts.barlow(
-                                textStyle: const TextStyle(
+                              style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                                  fontFamily: 'Barlow-Thin'),
                             ),
                           )
                         ],
