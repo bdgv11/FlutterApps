@@ -1,3 +1,4 @@
+import 'package:barber_shopp_app/screens/forgot_password.dart';
 import 'package:barber_shopp_app/screens/home_page.dart';
 import 'package:barber_shopp_app/screens/register_page.dart';
 import 'package:barber_shopp_app/utils/firebase_authentication.dart';
@@ -53,7 +54,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Padding(
-                  padding: const EdgeInsets.all(24),
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -106,23 +107,6 @@ class _MyWidgetState extends State<LoginBarberShop> {
                               ),
                               obscureText: true,
                             ),
-                            /*TextButton(
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => RegisterScreen(),
-                                  ),
-                                );
-                              },
-                              child: const Text(
-                                'Olvidé contraseña',
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                    color: Colors.white54,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Barlow-Thin'),
-                              ),
-                            )*/
                           ],
                         ),
                       ),
@@ -207,6 +191,26 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                 ),
                               ],
                             ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(height: 24),
+                          GestureDetector(
+                            onTap: () => Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: ((context) => ForgotPasswordPage()),
+                              ),
+                            ),
+                            child: const Text(
+                              'Olvidé contraseña',
+                              style: TextStyle(
+                                  //decoration: TextDecoration.underline,
+                                  color: Colors.white54,
+                                  fontFamily: 'Barlow-Thin'),
+                            ),
+                          )
+                        ],
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
