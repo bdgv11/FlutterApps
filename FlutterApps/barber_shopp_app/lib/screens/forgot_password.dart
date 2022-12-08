@@ -35,8 +35,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             end: Alignment.bottomLeft,
             colors: [
               Colors.black,
-              Color.fromARGB(255, 48, 26, 79),
-              Color.fromARGB(255, 20, 154, 140),
+              Color.fromARGB(255, 104, 34, 4),
+              Color.fromARGB(255, 187, 194, 188),
             ],
           ),
         ),
@@ -63,6 +63,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       Validator.validateEmail(email: _emailController.text),
                   controller: _emailController,
                   cursorColor: Colors.white,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     hintText: 'Correo electrónico',
                     errorStyle: TextStyle(
@@ -106,7 +107,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               child: const Text(
                                 'Reestablecer contraseña',
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 120, 43, 132),
+                                    color: Color.fromARGB(255, 104, 34, 4),
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Barlow-Thin'),
                               ),

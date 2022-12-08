@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3),
+              crossAxisCount: 2),
           itemCount: _comidas.length,
           itemBuilder: (context, index) {
             final item = _comidas.elementAt(index);

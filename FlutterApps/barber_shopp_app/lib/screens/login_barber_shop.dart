@@ -30,6 +30,13 @@ class _MyWidgetState extends State<LoginBarberShop> {
   bool _processingLogIn = false;
 
   @override
+  void dispose() {
+    _emailFieldController.dispose();
+    _passwordFieldController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
@@ -44,8 +51,8 @@ class _MyWidgetState extends State<LoginBarberShop> {
               end: Alignment.bottomLeft,
               colors: [
                 Colors.black,
-                Color.fromARGB(255, 48, 26, 79),
-                Color.fromARGB(255, 20, 154, 140),
+                Color.fromARGB(255, 104, 34, 4),
+                Color.fromARGB(255, 187, 194, 188),
               ],
             ),
           ),
@@ -54,7 +61,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  padding: const EdgeInsets.only(left: 24, right: 24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -62,21 +69,21 @@ class _MyWidgetState extends State<LoginBarberShop> {
                         key: _formKey,
                         child: Column(
                           children: [
-                            const Text(
-                              'Bienvenido, inicia sesión para continuar.',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 34,
-                                fontFamily: 'Barlow-Thin',
+                            const Center(
+                              child: CircleAvatar(
+                                backgroundImage:
+                                    AssetImage("Assets/Images/logo2.jpeg"),
+                                radius: 60,
                               ),
                             ),
-                            const Padding(padding: EdgeInsets.all(30)),
+                            const Padding(padding: EdgeInsets.all(20)),
                             TextFormField(
                               style: const TextStyle(color: Colors.white),
                               validator: (value) => Validator.validateEmail(
                                   email: _emailFieldController.text),
                               controller: _emailFieldController,
                               focusNode: _focusEmail,
+                              keyboardType: TextInputType.emailAddress,
                               decoration: const InputDecoration(
                                 hintText: 'Correo electrónico',
                                 errorStyle: TextStyle(
@@ -164,10 +171,11 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             const SnackBar(
-                                              backgroundColor: Color.fromARGB(
-                                                  255, 20, 154, 140),
+                                              backgroundColor: Colors.black,
+                                              duration:
+                                                  Duration(milliseconds: 750),
                                               content: Text(
-                                                'Correo NO existe o contrasena incorrecta',
+                                                'Correo no existe o contrasena incorrecta',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                     fontSize: 25,
@@ -183,7 +191,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                       'Iniciar Sesión',
                                       style: TextStyle(
                                           color:
-                                              Color.fromARGB(255, 120, 43, 132),
+                                              Color.fromARGB(255, 104, 34, 4),
                                           fontWeight: FontWeight.bold,
                                           fontFamily: 'Barlow-Thin'),
                                     ),
@@ -198,7 +206,8 @@ class _MyWidgetState extends State<LoginBarberShop> {
                           GestureDetector(
                             onTap: () => Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: ((context) => ForgotPasswordPage()),
+                                builder: ((context) =>
+                                    const ForgotPasswordPage()),
                               ),
                             ),
                             child: const Text(

@@ -1,3 +1,4 @@
+import 'package:barber_shopp_app/screens/appointment.dart';
 import 'package:barber_shopp_app/screens/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -35,13 +36,23 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
         setState(() {
           _currentIndex = value;
           print('Usuario conectado ${_user.displayName}');
-
-          if (_currentIndex == 0) {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => HomePageScreen(user: _user),
-            ));
-          }
         });
+
+        if (_currentIndex == 0) {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => HomePageScreen(user: _user),
+          ));
+        }
+        if (_currentIndex == 1) {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => AppointmentScreen(user: _user),
+          ));
+        }
+        if (_currentIndex == 2) {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => HomePageScreen(user: _user),
+          ));
+        }
       },
       items: const [
         BottomNavigationBarItem(

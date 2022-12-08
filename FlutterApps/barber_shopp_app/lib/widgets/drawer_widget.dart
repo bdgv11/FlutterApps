@@ -34,15 +34,15 @@ class _DrawerUserWidgetState extends State<DrawerUserWidget> {
                 end: Alignment.bottomLeft,
                 colors: [
                   Colors.black,
-                  Color.fromARGB(255, 48, 26, 79),
-                  Color.fromARGB(255, 20, 154, 140),
+                  Color.fromARGB(255, 104, 34, 4),
+                  Color.fromARGB(255, 187, 194, 188),
                 ],
               ),
               color: Colors.white,
             ),
             child: Center(
               child: CircleAvatar(
-                backgroundImage: AssetImage("Assets/Images/avatar1.jpg"),
+                backgroundImage: AssetImage("Assets/Images/avatar1.jpeg"),
                 radius: 50,
               ),
             ),

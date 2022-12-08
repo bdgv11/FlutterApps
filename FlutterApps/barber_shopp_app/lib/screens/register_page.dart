@@ -47,8 +47,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               end: Alignment.bottomLeft,
               colors: [
                 Colors.black,
-                Color.fromARGB(255, 48, 26, 79),
-                Color.fromARGB(255, 20, 154, 140),
+                Color.fromARGB(255, 104, 34, 4),
+                Color.fromARGB(255, 187, 194, 188),
               ],
             ),
           ),
@@ -101,6 +101,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               email: _emailFieldController.text),
                           controller: _emailFieldController,
                           focusNode: _focusEmail,
+                          keyboardType: TextInputType.emailAddress,
                           decoration: const InputDecoration(
                             icon: Icon(
                               Icons.email,
@@ -138,6 +139,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             hintStyle: TextStyle(
                               color: Colors.white,
+                              fontFamily: 'Barlow-Thin',
                             ),
                           ),
                           obscureText: true,
@@ -193,15 +195,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         const SnackBar(
-                                          backgroundColor:
-                                              Color.fromARGB(255, 20, 154, 140),
+                                          backgroundColor: Colors.black,
                                           content: Text(
                                             'Correo en uso',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 25,
                                                 fontWeight: FontWeight.bold,
-                                                fontFamily: 'Barlow'),
+                                                fontFamily: 'Barlow-Thin'),
                                           ),
                                         ),
                                       );
@@ -211,8 +212,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 child: const Text(
                                   'Registrarse',
                                   style: TextStyle(
-                                    color: Color.fromARGB(255, 120, 43, 132),
-                                  ),
+                                      color: Color.fromARGB(255, 104, 34, 4),
+                                      fontFamily: 'Barlow-Thin'),
                                 ),
                               ),
                             ),
@@ -224,7 +225,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const Text(
                         '¿Ya tienes cuenta? ',
                         style: TextStyle(
-                            color: Colors.white54, fontFamily: 'Barlow'),
+                            color: Colors.white54, fontFamily: 'Barlow-Thin'),
                       ),
                       TextButton(
                         onPressed: () {
@@ -240,6 +241,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             textStyle: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
+                              fontFamily: 'Barlow-Thin',
                             ),
                           ),
                         ),
