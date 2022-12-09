@@ -76,7 +76,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                 radius: 60,
                               ),
                             ),
-                            const Padding(padding: EdgeInsets.all(20)),
+                            //const Padding(padding: EdgeInsets.all(20)),
                             TextFormField(
                               style: const TextStyle(color: Colors.white),
                               validator: (value) => Validator.validateEmail(
@@ -84,6 +84,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                               controller: _emailFieldController,
                               focusNode: _focusEmail,
                               keyboardType: TextInputType.emailAddress,
+                              cursorColor: Colors.white,
                               decoration: const InputDecoration(
                                 hintText: 'Correo electrónico',
                                 errorStyle: TextStyle(
@@ -91,8 +92,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                   fontWeight: FontWeight.bold,
                                 ),
                                 hintStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Barlow-Thin'),
+                                    color: Colors.white, fontFamily: 'Barlow'),
                               ),
                             ),
                             const Padding(padding: EdgeInsets.all(20)),
@@ -102,15 +102,14 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                   password: _passwordFieldController.text),
                               controller: _passwordFieldController,
                               focusNode: _focusPassword,
-                              // ignore: prefer_const_constructors
-                              decoration: InputDecoration(
+                              cursorColor: Colors.white,
+                              decoration: const InputDecoration(
                                 hintText: 'Contraseña',
-                                errorStyle: const TextStyle(
+                                errorStyle: TextStyle(
                                     color: Colors.teal,
                                     fontWeight: FontWeight.bold),
-                                hintStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Barlow-Thin'),
+                                hintStyle: TextStyle(
+                                    color: Colors.white, fontFamily: 'Barlow'),
                               ),
                               obscureText: true,
                             ),
@@ -180,7 +179,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                                 style: TextStyle(
                                                     fontSize: 25,
                                                     fontWeight: FontWeight.bold,
-                                                    fontFamily: 'Barlow-Thin'),
+                                                    fontFamily: 'Barlow'),
                                               ),
                                             ),
                                           );
@@ -193,7 +192,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                           color:
                                               Color.fromARGB(255, 104, 34, 4),
                                           fontWeight: FontWeight.bold,
-                                          fontFamily: 'Barlow-Thin'),
+                                          fontFamily: 'Barlow'),
                                     ),
                                   ),
                                 ),
@@ -215,7 +214,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                               style: TextStyle(
                                   //decoration: TextDecoration.underline,
                                   color: Colors.white54,
-                                  fontFamily: 'Barlow-Thin'),
+                                  fontFamily: 'Barlow'),
                             ),
                           )
                         ],
@@ -226,8 +225,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                           const Text(
                             '¿No tienes cuenta? ',
                             style: TextStyle(
-                                color: Colors.white54,
-                                fontFamily: 'Barlow-Thin'),
+                                color: Colors.white54, fontFamily: 'Barlow'),
                           ),
                           TextButton(
                             onPressed: () {
@@ -242,7 +240,7 @@ class _MyWidgetState extends State<LoginBarberShop> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontFamily: 'Barlow-Thin'),
+                                  fontFamily: 'Barlow'),
                             ),
                           )
                         ],

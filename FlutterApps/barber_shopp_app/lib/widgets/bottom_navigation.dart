@@ -58,7 +58,11 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
         BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined, color: Colors.white), label: ''),
         BottomNavigationBarItem(
-            icon: Icon(Icons.post_add_outlined, color: Colors.white, size: 45),
+            icon: Icon(
+              Icons.add_box_outlined,
+              color: Colors.white,
+              size: 40,
+            ),
             label: ''),
         BottomNavigationBarItem(
             icon:

@@ -139,7 +139,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             hintStyle: TextStyle(
                               color: Colors.white,
-                              fontFamily: 'Barlow-Thin',
+                              fontFamily: 'Barlow',
                             ),
                           ),
                           obscureText: true,
@@ -202,7 +202,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             style: TextStyle(
                                                 fontSize: 25,
                                                 fontWeight: FontWeight.bold,
-                                                fontFamily: 'Barlow-Thin'),
+                                                fontFamily: 'Barlow'),
                                           ),
                                         ),
                                       );
@@ -213,7 +213,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   'Registrarse',
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 104, 34, 4),
-                                      fontFamily: 'Barlow-Thin'),
+                                      fontFamily: 'Barlow'),
                                 ),
                               ),
                             ),
@@ -225,7 +225,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const Text(
                         '¿Ya tienes cuenta? ',
                         style: TextStyle(
-                            color: Colors.white54, fontFamily: 'Barlow-Thin'),
+                            color: Colors.white54, fontFamily: 'Barlow'),
                       ),
                       TextButton(
                         onPressed: () {
@@ -241,7 +241,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             textStyle: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontFamily: 'Barlow-Thin',
+                              fontFamily: 'Barlow',
                             ),
                           ),
                         ),

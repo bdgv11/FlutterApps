@@ -53,7 +53,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,
-                    fontFamily: 'Barlow-Thin',
+                    fontFamily: 'Barlow',
                   ),
                 ),
                 const Padding(padding: EdgeInsets.all(30)),
@@ -70,8 +70,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       color: Colors.teal,
                       fontWeight: FontWeight.bold,
                     ),
-                    hintStyle: TextStyle(
-                        color: Colors.white, fontFamily: 'Barlow-Thin'),
+                    hintStyle:
+                        TextStyle(color: Colors.white, fontFamily: 'Barlow'),
                   ),
                 ),
                 const Padding(padding: EdgeInsets.all(15)),
@@ -109,7 +109,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 104, 34, 4),
                                     fontWeight: FontWeight.bold,
-                                    fontFamily: 'Barlow-Thin'),
+                                    fontFamily: 'Barlow'),
                               ),
                             ),
                           )
@@ -137,7 +137,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           content: Text(
             'Correo enviado.',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 25, fontFamily: 'Barlow-Thin'),
+            style: TextStyle(fontSize: 25, fontFamily: 'Barlow'),
           ),
         ),
       );
@@ -149,7 +149,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           content: Text(
             'No exite ese correo.',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 25, fontFamily: 'Barlow-Thin'),
+            style: TextStyle(fontSize: 25, fontFamily: 'Barlow'),
           ),
         ),
       );

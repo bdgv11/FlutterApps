@@ -62,7 +62,7 @@ class _MyWidgetState extends State<HomePageScreen> {
                     'Nombre: ${_user.displayName}',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                        fontFamily: 'Barlow-Thin',
+                        fontFamily: 'Barlow',
                         color: Colors.white,
                         fontSize: 34),
                   ),
@@ -71,19 +71,19 @@ class _MyWidgetState extends State<HomePageScreen> {
                     'Correo: ${_user.email}',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                        fontFamily: 'Barlow-Thin', color: Colors.white),
+                        fontFamily: 'Barlow', color: Colors.white),
                   ),
                   const Padding(padding: EdgeInsets.all(8)),
                   _user.emailVerified
                       ? const Text(
                           'Email verificado!',
                           style: TextStyle(
-                              color: Colors.green, fontFamily: 'Barlow-Thin'),
+                              color: Colors.green, fontFamily: 'Barlow'),
                         )
                       : const Text(
                           'Email NO verificado!',
                           style: TextStyle(
-                              color: Colors.red, fontFamily: 'Barlow-Thin'),
+                              color: Colors.red, fontFamily: 'Barlow'),
                         ),
                   const Padding(padding: EdgeInsets.all(8)),
                   _user.emailVerified
