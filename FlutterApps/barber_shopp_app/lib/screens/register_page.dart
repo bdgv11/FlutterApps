@@ -140,6 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             hintStyle: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Barlow',
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           obscureText: true,
@@ -225,7 +226,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const Text(
                         '¿Ya tienes cuenta? ',
                         style: TextStyle(
-                            color: Colors.white54, fontFamily: 'Barlow'),
+                            color: Colors.white, fontFamily: 'Barlow'),
                       ),
                       TextButton(
                         onPressed: () {
