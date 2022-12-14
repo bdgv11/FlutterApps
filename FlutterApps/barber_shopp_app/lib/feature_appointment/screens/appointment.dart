@@ -1,10 +1,9 @@
+import 'package:barber_shopp_app/feature_appointment/firebase_methods/collections_methods.dart';
 import 'package:barber_shopp_app/feature_appointment/models/barbers.dart';
 import 'package:barber_shopp_app/feature_appointment/models/services.dart';
-import 'package:barber_shopp_app/feature_appointment/widgets/available_hours.dart';
 import 'package:barber_shopp_app/feature_appointment/widgets/hours_buttoms_widget.dart';
 import 'package:barber_shopp_app/feature_home/widgets/bottom_navigation.dart';
 import 'package:barber_shopp_app/feature_home/widgets/drawer_widget.dart';
-import 'package:barber_shopp_app/feature_appointment/firebase_methods/collections_methods.dart';
 import 'package:barber_shopp_app/firebase/connection_error.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,6 +21,7 @@ class AppointmentScreen extends StatefulWidget {
 
 class _AppointmentScreenState extends State<AppointmentScreen> {
   //
+
   late User _user;
   DateTime today = DateTime.now();
   void _FocusDaySelected(DateTime day, DateTime focusedDay) {
@@ -339,11 +339,55 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   color: Colors.white,
                 ),
                 const Padding(padding: EdgeInsets.all(8)),
-                AvailableHours(
-                    barberoSeleccionado: barberoSeleccionado,
-                    user: _user,
-                    today: today,
-                    servicioSeleccionado: servicioSeleccionado)
+                FutureBuilder(
+                  future: Firebase.initializeApp(),
+                  builder: (context, snapshot) {
+                    //ERROR
+                    if (snapshot.hasError) {
+                      return const ConnectionError();
+                    }
+                    //CONNECTED BUT WITHOUT DATA
+                    if (servicioSeleccionado.isNotEmpty &&
+                        _user.displayName!.isNotEmpty &&
+                        barberoSeleccionado.isNotEmpty) {
+                      if (snapshot.connectionState == ConnectionState.done &&
+                          snapshot.data.toString() != '[]') {
+                        String fecha =
+                            "${today.day}/${today.month}/${today.year}";
+                        print(
+                            'No tengo data, procedo a meter la info de los horarios');
+                        //
+                        //ADD HOURS TO FIREBASE COLLECTION 'CITA'
+                        CollectionMethods().addHours(barberoSeleccionado,
+                            _user.displayName!, fecha, servicioSeleccionado);
+                        print("INFO AGREGADA");
+                      }
+                    }
+
+                    // CONNECTED WITH DATA
+                    if (snapshot.connectionState == ConnectionState.done &&
+                        snapshot.data.toString() != '[]') {
+                      /// Checking if the barberoSeleccionado, _user.displayName and
+                      /// servicioSeleccionado are not empty.
+
+                      String fecha =
+                          "${today.day}/${today.month}/${today.year}";
+                      print('No voy a agregar mas!!!!');
+                      return Container(
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                          height: 200,
+                          child: HorasWidget(
+                            barberoSeleccionado: barberoSeleccionado,
+                            fecha: fecha,
+                            servicioSeleccionado: servicioSeleccionado,
+                          ),
+                        ),
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                )
               ],
             ),
           ),
@@ -354,4 +398,11 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
       ),
     );
   }
+
+  Stream<QuerySnapshot> getStream() => FirebaseFirestore.instance
+      .collection("Cita")
+      .where("Fecha", isEqualTo: today)
+      .where('Barbero', isEqualTo: barberoSeleccionado)
+      .orderBy('Hora', descending: false)
+      .snapshots();
 }
