@@ -7,7 +7,7 @@ class HourItem extends StatelessWidget {
   //
   final String barbero;
   final String cliente;
-  final int fecha;
+  final String fecha;
   final String hora;
   final bool horaDisponible;
   final String tipoServicio;
@@ -16,7 +16,7 @@ class HourItem extends StatelessWidget {
   HourItem(this._snapshot)
       : barbero = _snapshot.get('Barbero') as String,
         cliente = _snapshot.get('Cliente') as String,
-        fecha = _snapshot.get('Fecha') as int,
+        fecha = _snapshot.get('Fecha') as String,
         hora = _snapshot.get('Hora') as String,
         horaDisponible = _snapshot.get('HoraDisponible') as bool,
         tipoServicio = _snapshot.get('TipoServicio') as String;
@@ -28,9 +28,11 @@ class HourItem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+          elevation: 30,
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
         ),
         onPressed: () {
           _hora = hora;
@@ -38,7 +40,7 @@ class HourItem extends StatelessWidget {
         },
         child: Text(
           '${hora}',
-          style: TextStyle(color: Colors.white, fontFamily: 'Barlow'),
+          style: TextStyle(color: Colors.black, fontFamily: 'Barlow'),
         ),
       ),
     );

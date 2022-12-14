@@ -1,5 +1,5 @@
 /// It returns a MaterialApp widget that has a title, a home, and a debugShowCheckedModeBanner
-import 'package:barber_shopp_app/screens/login_barber_shop.dart';
+import 'package:barber_shopp_app/feature_login/screens/login_barber_shop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 

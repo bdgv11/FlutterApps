@@ -1,17 +1,16 @@
-import 'package:barber_shopp_app/models/barbers.dart';
-import 'package:barber_shopp_app/models/services.dart';
-import 'package:barber_shopp_app/utils/collections_methods.dart';
-import 'package:barber_shopp_app/widgets/bottom_navigation.dart';
-import 'package:barber_shopp_app/widgets/hours_buttoms_widget.dart';
+import 'package:barber_shopp_app/feature_appointment/models/barbers.dart';
+import 'package:barber_shopp_app/feature_appointment/models/services.dart';
+import 'package:barber_shopp_app/feature_appointment/widgets/available_hours.dart';
+import 'package:barber_shopp_app/feature_appointment/widgets/hours_buttoms_widget.dart';
+import 'package:barber_shopp_app/feature_home/widgets/bottom_navigation.dart';
+import 'package:barber_shopp_app/feature_home/widgets/drawer_widget.dart';
+import 'package:barber_shopp_app/feature_appointment/firebase_methods/collections_methods.dart';
+import 'package:barber_shopp_app/firebase/connection_error.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../widgets/connection_error.dart';
-import '../widgets/drawer_widget.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 class AppointmentScreen extends StatefulWidget {
   final User user;
@@ -340,34 +339,11 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   color: Colors.white,
                 ),
                 const Padding(padding: EdgeInsets.all(8)),
-                FutureBuilder(
-                  future: Firebase.initializeApp(),
-                  builder: (context, snapshot) {
-                    //ERROR
-                    if (snapshot.hasError) {
-                      return const ConnectionError();
-                    }
-                    //CONNECTED BUT WITHOUT DATA
-                    if (snapshot.connectionState == ConnectionState.done &&
-                        snapshot.hasData == false) {
-                      //ADD HOURS TO FIREBASE COLLECTION 'CITA'
-                      CollectionMethods().addHours(barberoSeleccionado,
-                          _user.displayName!, today, servicioSeleccionado);
-                    }
-
-                    // CONNECTED WITH DATA
-                    if (snapshot.connectionState == ConnectionState.done &&
-                        snapshot.hasData) {
-                      CollectionMethods().addHours(barberoSeleccionado,
-                          _user.displayName!, today, servicioSeleccionado);
-                      return Container(
-                        alignment: Alignment.center,
-                        child: SizedBox(height: 300, child: HorasWidget()),
-                      );
-                    }
-                    return const CircularProgressIndicator();
-                  },
-                )
+                AvailableHours(
+                    barberoSeleccionado: barberoSeleccionado,
+                    user: _user,
+                    today: today,
+                    servicioSeleccionado: servicioSeleccionado)
               ],
             ),
           ),

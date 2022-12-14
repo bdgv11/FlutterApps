@@ -1,9 +1,7 @@
-import 'package:barber_shopp_app/screens/login_barber_shop.dart';
+import 'package:barber_shopp_app/feature_login/screens/login_barber_shop.dart';
 import 'package:barber_shopp_app/utils/validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});

@@ -1,5 +1,5 @@
-import 'package:barber_shopp_app/widgets/connection_error.dart';
-import 'package:barber_shopp_app/widgets/hour_item.dart';
+import 'package:barber_shopp_app/feature_appointment/widgets/hour_item.dart';
+import 'package:barber_shopp_app/firebase/connection_error.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/src/widgets/framework.dart';
 class HorasWidget extends StatelessWidget {
   static Stream<QuerySnapshot> getStream() => FirebaseFirestore.instance
       .collection("Cita")
-      .where("Fecha", isEqualTo: 1670976000000000)
+      .where("Fecha", isEqualTo: "12/12/2022")
       .orderBy('Hora', descending: false)
       .snapshots();
 

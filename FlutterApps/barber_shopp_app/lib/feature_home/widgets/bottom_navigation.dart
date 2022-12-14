@@ -1,9 +1,7 @@
-import 'package:barber_shopp_app/screens/appointment.dart';
-import 'package:barber_shopp_app/screens/home_page.dart';
+import 'package:barber_shopp_app/feature_appointment/screens/appointment.dart';
+import 'package:barber_shopp_app/feature_home/screens/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class BottomNavigationWidget extends StatefulWidget {
   final User user;

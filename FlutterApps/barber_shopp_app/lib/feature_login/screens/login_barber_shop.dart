@@ -1,12 +1,12 @@
-import 'package:barber_shopp_app/screens/forgot_password.dart';
-import 'package:barber_shopp_app/screens/home_page.dart';
-import 'package:barber_shopp_app/screens/register_page.dart';
-import 'package:barber_shopp_app/utils/firebase_authentication.dart';
+import 'package:barber_shopp_app/feature_home/screens/home_page.dart';
+import 'package:barber_shopp_app/feature_register/screens/register_page.dart';
+import 'package:barber_shopp_app/firebase/firebase_authentication.dart';
 import 'package:barber_shopp_app/utils/validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import '../../feature_forgot_password/screens/forgot_password.dart';
 
 class LoginBarberShop extends StatefulWidget {
   const LoginBarberShop({super.key});

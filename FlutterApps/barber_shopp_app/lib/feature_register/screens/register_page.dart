@@ -1,14 +1,12 @@
 /// _RegisterScreenState is a stateful widget that has a form with three text fields and a button
-import 'package:barber_shopp_app/screens/home_page.dart';
-import 'package:barber_shopp_app/screens/login_barber_shop.dart';
+
+import 'package:barber_shopp_app/feature_home/screens/home_page.dart';
+import 'package:barber_shopp_app/feature_login/screens/login_barber_shop.dart';
+import 'package:barber_shopp_app/firebase/firebase_authentication.dart';
 import 'package:barber_shopp_app/utils/validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../utils/firebase_authentication.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override

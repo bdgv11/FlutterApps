@@ -1,4 +1,4 @@
-import 'package:barber_shopp_app/screens/login_barber_shop.dart';
+import 'package:barber_shopp_app/feature_login/screens/login_barber_shop.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
