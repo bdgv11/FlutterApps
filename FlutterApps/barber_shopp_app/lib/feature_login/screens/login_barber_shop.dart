@@ -155,7 +155,8 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                                   .signInUsingEmailAndPassword(
                                                       email:
                                                           _emailFieldController
-                                                              .text,
+                                                              .text
+                                                              .trim(),
                                                       password:
                                                           _passwordFieldController
                                                               .text);

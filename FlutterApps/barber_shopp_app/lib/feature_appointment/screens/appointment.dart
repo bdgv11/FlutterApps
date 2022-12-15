@@ -5,7 +5,6 @@ import 'package:barber_shopp_app/feature_appointment/widgets/hours_buttoms_widge
 import 'package:barber_shopp_app/feature_home/widgets/bottom_navigation.dart';
 import 'package:barber_shopp_app/feature_home/widgets/drawer_widget.dart';
 import 'package:barber_shopp_app/firebase/connection_error.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -43,9 +42,9 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   ];
 
   final List _barbers = [
-    Barbers('Bryan', 'Especialidad en barbas', true,
+    Barbers('Barbero1', 'Especialidad en barbas', true,
         Image.asset('Assets/Images/logo1.png')),
-    Barbers('David', 'Especialidad en cortes', true,
+    Barbers('Barbero2', 'Especialidad en cortes', true,
         Image.asset('Assets/Images/logo1.png')),
   ];
 
@@ -118,7 +117,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   selectedDayPredicate: (day) => isSameDay(day, today),
                   focusedDay: today,
                   firstDay: DateTime.now(),
-                  lastDay: DateTime(2024, 31, 31),
+                  lastDay: DateTime.now().add(Duration(days: 60)),
                   startingDayOfWeek: StartingDayOfWeek.monday,
                   locale: 'es_ES',
                   onDaySelected: _FocusDaySelected,
@@ -339,6 +338,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   color: Colors.white,
                 ),
                 const Padding(padding: EdgeInsets.all(8)),
+
                 FutureBuilder(
                   future: Firebase.initializeApp(),
                   builder: (context, snapshot) {
@@ -347,11 +347,11 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                       return const ConnectionError();
                     }
                     //CONNECTED BUT WITHOUT DATA
-                    if (servicioSeleccionado.isNotEmpty &&
+                    /*if (servicioSeleccionado.isNotEmpty &&
                         _user.displayName!.isNotEmpty &&
                         barberoSeleccionado.isNotEmpty) {
                       if (snapshot.connectionState == ConnectionState.done &&
-                          snapshot.data.toString() != '[]') {
+                          snapshot.data.toString() == '[]') {
                         String fecha =
                             "${today.day}/${today.month}/${today.year}";
                         print(
@@ -362,16 +362,15 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                             _user.displayName!, fecha, servicioSeleccionado);
                         print("INFO AGREGADA");
                       }
-                    }
+                    }*/
 
                     // CONNECTED WITH DATA
                     if (snapshot.connectionState == ConnectionState.done &&
                         snapshot.data.toString() != '[]') {
-                      /// Checking if the barberoSeleccionado, _user.displayName and
-                      /// servicioSeleccionado are not empty.
-
                       String fecha =
                           "${today.day}/${today.month}/${today.year}";
+                      CollectionMethods().addHours(barberoSeleccionado,
+                          _user.displayName!, fecha, servicioSeleccionado);
                       print('No voy a agregar mas!!!!');
                       return Container(
                         alignment: Alignment.center,
@@ -398,11 +397,4 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
       ),
     );
   }
-
-  Stream<QuerySnapshot> getStream() => FirebaseFirestore.instance
-      .collection("Cita")
-      .where("Fecha", isEqualTo: today)
-      .where('Barbero', isEqualTo: barberoSeleccionado)
-      .orderBy('Hora', descending: false)
-      .snapshots();
 }

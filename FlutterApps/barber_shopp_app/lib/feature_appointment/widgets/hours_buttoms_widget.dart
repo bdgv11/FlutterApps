@@ -53,17 +53,4 @@ class HorasWidget extends StatelessWidget {
       },
     );
   }
-
-  getInfo() async {
-    try {
-      await FirebaseFirestore.instance
-          .collection("Cita")
-          .where('Fecha', isEqualTo: fecha)
-          .where('Barbero', isEqualTo: barberoSeleccionado)
-          .orderBy('Hora', descending: false)
-          .get();
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
 }

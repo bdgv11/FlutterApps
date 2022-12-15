@@ -11,6 +11,7 @@ class HourItem extends StatelessWidget {
   final String hora;
   final bool horaDisponible;
   final String tipoServicio;
+  final bool diaDisponible;
   final QueryDocumentSnapshot _snapshot;
 
   HourItem(this._snapshot)
@@ -19,6 +20,7 @@ class HourItem extends StatelessWidget {
         fecha = _snapshot.get('Fecha') as String,
         hora = _snapshot.get('Hora') as String,
         horaDisponible = _snapshot.get('HoraDisponible') as bool,
+        diaDisponible = _snapshot.get('DiaDisponible') as bool,
         tipoServicio = _snapshot.get('TipoServicio') as String;
 
   @override
