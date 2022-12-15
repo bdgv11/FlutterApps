@@ -1,10 +1,10 @@
-import 'package:barber_shopp_app/feature_appointment/firebase_methods/collections_methods.dart';
-import 'package:barber_shopp_app/feature_appointment/models/barbers.dart';
-import 'package:barber_shopp_app/feature_appointment/models/services.dart';
-import 'package:barber_shopp_app/feature_appointment/widgets/hours_buttoms_widget.dart';
-import 'package:barber_shopp_app/feature_home/widgets/bottom_navigation.dart';
-import 'package:barber_shopp_app/feature_home/widgets/drawer_widget.dart';
-import 'package:barber_shopp_app/firebase/connection_error.dart';
+import 'package:barber/feature_appointment/firebase_methods/collections_methods.dart';
+import 'package:barber/feature_appointment/models/barbers.dart';
+import 'package:barber/feature_appointment/models/services.dart';
+import 'package:barber/feature_appointment/widgets/hours_buttoms_widget.dart';
+import 'package:barber/feature_home/widgets/bottom_navigation.dart';
+import 'package:barber/feature_home/widgets/drawer_widget.dart';
+import 'package:barber/firebase/connection_error.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -358,9 +358,9 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                             'No tengo data, procedo a meter la info de los horarios');
                         //
                         //ADD HOURS TO FIREBASE COLLECTION 'CITA'
-                        CollectionMethods().addHours(barberoSeleccionado,
+                        /*CollectionMethods().addHours(barberoSeleccionado,
                             _user.displayName!, fecha, servicioSeleccionado);
-                        print("INFO AGREGADA");
+                        print("INFO AGREGADA");*/
                       }
                     }
 
@@ -369,8 +369,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                         snapshot.data.toString() != '[]') {
                       String fecha =
                           "${today.day}/${today.month}/${today.year}";
-                      CollectionMethods().addHours(barberoSeleccionado,
-                          _user.displayName!, fecha, servicioSeleccionado);
+                      /*CollectionMethods().addHours(barberoSeleccionado,
+                          _user.displayName!, fecha, servicioSeleccionado);*/
                       print('No voy a agregar mas!!!!');
                       return Container(
                         alignment: Alignment.center,

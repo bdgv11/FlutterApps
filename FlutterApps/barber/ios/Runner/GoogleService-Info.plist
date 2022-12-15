@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>157926582303-ft7f5daa88q31roq1b4atu1t99le1aqm.apps.googleusercontent.com</string>
+	<string>1062509959853-p76arsjh22bhe4ntgu3ffe7re2qo31h3.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.157926582303-ft7f5daa88q31roq1b4atu1t99le1aqm</string>
+	<string>com.googleusercontent.apps.1062509959853-p76arsjh22bhe4ntgu3ffe7re2qo31h3</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDizElpzYhINgG48p3-VLoD9qYTiKee1Hw</string>
+	<string>AIzaSyDhipmX1QFhkPGUZ2mvv63bGD7gL4NVuXI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>157926582303</string>
+	<string>1062509959853</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>barbershopapp.bryanguzman.barberShoppApp</string>
+	<string>com.barber.bryanguzman.barber</string>
 	<key>PROJECT_ID</key>
-	<string>barber-shop-14a28</string>
+	<string>barber-app-487f1</string>
 	<key>STORAGE_BUCKET</key>
-	<string>barber-shop-14a28.appspot.com</string>
+	<string>barber-app-487f1.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:157926582303:ios:78623a4c5f8c032df68d2a</string>
+	<string>1:1062509959853:ios:d789b5c1fbca3f86bcc424</string>
 </dict>
 </plist>
