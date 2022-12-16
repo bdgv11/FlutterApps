@@ -54,7 +54,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   @override
   void initState() {
     _user = widget.user;
-    getInfo();
     super.initState();
   }
 
@@ -214,7 +213,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                           onTap: () {
                             setState(() {
                               servicioSeleccionado = item.nombre;
-                              getInfo();
                             });
                           },
                           child: Column(
@@ -351,21 +349,17 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                       return const ConnectionError();
                     }
 
-                    /*if (snapshot.connectionState == ConnectionState.waiting) {
-                      getInfo();
-                      return CircularProgressIndicator();
-                    }*/
                     //CONNECTED BUT WITHOUT DATA
                     if (_user.displayName!.isNotEmpty &&
                         barberoSeleccionado.isNotEmpty) {
                       if (snapshot.connectionState == ConnectionState.done) {
-                        getInfo();
+                        getInfo(fecha, barberoSeleccionado);
                         if (!existInfo) {
                           // Si la bandera es false es xq no hay info para esa fecha-barbero, entonces va agregarlas
                           String fecha =
                               "${today.day}/${today.month}/${today.year}";
-                          CollectionMethods().addHours(barberoSeleccionado,
-                              _user.displayName!, fecha, servicioSeleccionado);
+                          /*CollectionMethods().addHours(barberoSeleccionado,
+                              _user.displayName!, fecha, servicioSeleccionado);*/
                         }
                       }
                     }
@@ -399,11 +393,13 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     );
   }
 
-  void getInfo() async {
+  void getInfo(String fecha, String barbero) async {
     CollectionReference citas = FirebaseFirestore.instance.collection('Cita');
     QuerySnapshot query = await citas
-        .where('Fecha', isEqualTo: '${today.day + today.month + today.year}')
-        .where('Barbero', isEqualTo: barberoSeleccionado)
+        //.where('Fecha', isEqualTo: '${today.day + today.month + today.year}')
+        .where('Fecha', isEqualTo: fecha)
+        //.where('Barbero', isEqualTo: barberoSeleccionado)
+        .where('Barbero', isEqualTo: barbero)
         .where('HoraDisponible', isEqualTo: true)
         .orderBy('Hora', descending: false)
         .get();
@@ -416,7 +412,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
       }
       existInfo = true;
     } else {
-      existInfo = true;
+      CollectionMethods().addHours(
+          barberoSeleccionado, _user.displayName!, fecha, servicioSeleccionado);
     }
   }
 }
