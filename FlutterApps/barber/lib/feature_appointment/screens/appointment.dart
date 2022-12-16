@@ -1,10 +1,12 @@
 import 'package:barber/feature_appointment/firebase_methods/collections_methods.dart';
 import 'package:barber/feature_appointment/models/barbers.dart';
 import 'package:barber/feature_appointment/models/services.dart';
+import 'package:barber/feature_appointment/widgets/hour_item.dart';
 import 'package:barber/feature_appointment/widgets/hours_buttoms_widget.dart';
 import 'package:barber/feature_home/widgets/bottom_navigation.dart';
 import 'package:barber/feature_home/widgets/drawer_widget.dart';
 import 'package:barber/firebase/connection_error.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +31,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     });
   }
 
+  bool existInfo = false;
   String servicioSeleccionado = '';
   String barberoSeleccionado = '';
 
@@ -51,11 +54,13 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   @override
   void initState() {
     _user = widget.user;
+    getInfo();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    String fecha = "${today.day}/${today.month}/${today.year}";
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -117,7 +122,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   selectedDayPredicate: (day) => isSameDay(day, today),
                   focusedDay: today,
                   firstDay: DateTime.now(),
-                  lastDay: DateTime.now().add(Duration(days: 60)),
+                  lastDay: DateTime.now().add(const Duration(days: 60)),
                   startingDayOfWeek: StartingDayOfWeek.monday,
                   locale: 'es_ES',
                   onDaySelected: _FocusDaySelected,
@@ -209,8 +214,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                           onTap: () {
                             setState(() {
                               servicioSeleccionado = item.nombre;
+                              getInfo();
                             });
-                            print(servicioSeleccionado);
                           },
                           child: Column(
                             children: [
@@ -338,7 +343,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   color: Colors.white,
                 ),
                 const Padding(padding: EdgeInsets.all(8)),
-
                 FutureBuilder(
                   future: Firebase.initializeApp(),
                   builder: (context, snapshot) {
@@ -346,32 +350,29 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     if (snapshot.hasError) {
                       return const ConnectionError();
                     }
+
+                    /*if (snapshot.connectionState == ConnectionState.waiting) {
+                      getInfo();
+                      return CircularProgressIndicator();
+                    }*/
                     //CONNECTED BUT WITHOUT DATA
-                    if (servicioSeleccionado.isNotEmpty &&
-                        _user.displayName!.isNotEmpty &&
+                    if (_user.displayName!.isNotEmpty &&
                         barberoSeleccionado.isNotEmpty) {
-                      if (snapshot.connectionState == ConnectionState.done &&
-                          snapshot.data.toString() == '[]') {
-                        String fecha =
-                            "${today.day}/${today.month}/${today.year}";
-                        print(
-                            'No tengo data, procedo a meter la info de los horarios');
-                        //
-                        //ADD HOURS TO FIREBASE COLLECTION 'CITA'
-                        /*CollectionMethods().addHours(barberoSeleccionado,
-                            _user.displayName!, fecha, servicioSeleccionado);
-                        print("INFO AGREGADA");*/
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        getInfo();
+                        if (!existInfo) {
+                          // Si la bandera es false es xq no hay info para esa fecha-barbero, entonces va agregarlas
+                          String fecha =
+                              "${today.day}/${today.month}/${today.year}";
+                          CollectionMethods().addHours(barberoSeleccionado,
+                              _user.displayName!, fecha, servicioSeleccionado);
+                        }
                       }
                     }
 
                     // CONNECTED WITH DATA
                     if (snapshot.connectionState == ConnectionState.done &&
                         snapshot.data.toString() != '[]') {
-                      String fecha =
-                          "${today.day}/${today.month}/${today.year}";
-                      /*CollectionMethods().addHours(barberoSeleccionado,
-                          _user.displayName!, fecha, servicioSeleccionado);*/
-                      print('No voy a agregar mas!!!!');
                       return Container(
                         alignment: Alignment.center,
                         child: SizedBox(
@@ -396,5 +397,26 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         ),
       ),
     );
+  }
+
+  void getInfo() async {
+    CollectionReference citas = FirebaseFirestore.instance.collection('Cita');
+    QuerySnapshot query = await citas
+        .where('Fecha', isEqualTo: '${today.day + today.month + today.year}')
+        .where('Barbero', isEqualTo: barberoSeleccionado)
+        .where('HoraDisponible', isEqualTo: true)
+        .orderBy('Hora', descending: false)
+        .get();
+
+    if (query.docs.isNotEmpty) {
+      // SI NO ESTA VACIO VA IMPRIMIR Y CAMBIA EL FLAG A TRUE, PARA QUE PINTE LAS HORAS
+
+      for (var doc in query.docs) {
+        print({doc['Fecha'] + ' ' + doc['Hora'] + ' ' + doc['Barbero']});
+      }
+      existInfo = true;
+    } else {
+      existInfo = true;
+    }
   }
 }
