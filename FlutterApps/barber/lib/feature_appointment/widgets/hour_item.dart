@@ -38,11 +38,14 @@ class HourItem extends StatelessWidget {
         ),
         onPressed: () {
           _hora = hora;
-          Text('data');
+          Text(_hora);
         },
         child: Text(
           '${hora}',
-          style: TextStyle(color: Colors.black, fontFamily: 'Barlow'),
+          style: const TextStyle(
+              color: Colors.black,
+              fontFamily: 'Barlow',
+              fontWeight: FontWeight.bold),
         ),
       ),
     );

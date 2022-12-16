@@ -12,7 +12,7 @@ List<String> horas = [
   '6:00 pm'*/
 ];
 
-List<String> barberos = ['Barbero1', 'Barbero2'];
+//List<String> barberos = ['Barbero1', 'Barbero2'];
 
 class CollectionMethods {
   void addHours(
