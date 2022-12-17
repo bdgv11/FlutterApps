@@ -1,22 +1,25 @@
 import 'package:barber/feature_appointment/widgets/hour_item.dart';
 import 'package:barber/firebase/connection_error.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class HorasWidget extends StatelessWidget {
-  HorasWidget({
-    Key? key,
-    required this.barberoSeleccionado,
-    required this.fecha,
-    required this.servicioSeleccionado,
-  }) : super(key: key);
+  HorasWidget(
+      {required this.barberoSeleccionado,
+      required this.fecha,
+      required this.servicioSeleccionado,
+      required this.clienteDesdeSeleccionDeCita,
+      required this.servicioDesdeSeleccionDeCita});
 
-  final String barberoSeleccionado;
-  final String fecha;
-  final String servicioSeleccionado;
+  String barberoSeleccionado;
+  String fecha;
+  String servicioSeleccionado;
+  String clienteDesdeSeleccionDeCita;
+  String servicioDesdeSeleccionDeCita;
 
   Stream<QuerySnapshot> getStream() => FirebaseFirestore.instance
       .collection("Cita")
@@ -45,7 +48,8 @@ class HorasWidget extends StatelessWidget {
                   crossAxisCount: 4),
               itemCount: data.docs.length,
               itemBuilder: (context, index) {
-                return HourItem(data.docs[index]);
+                return HourItem(data.docs[index], clienteDesdeSeleccionDeCita,
+                    servicioDesdeSeleccionDeCita);
               },
             );
           }

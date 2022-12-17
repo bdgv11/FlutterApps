@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:barber/feature_appointment/firebase_methods/collections_methods.dart';
 import 'package:barber/feature_appointment/models/barbers.dart';
 import 'package:barber/feature_appointment/models/services.dart';
@@ -203,46 +204,49 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     itemBuilder: (context, index) {
                       final item = _services.elementAt(index);
 
-                      return Card(
-                        color: Colors.transparent,
-                        elevation: 1,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              servicioSeleccionado = item.nombre;
-                            });
-                          },
-                          child: Column(
-                            children: [
-                              //const Padding(padding: EdgeInsets.all(8)),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  CircleAvatar(
-                                    backgroundImage:
-                                        AssetImage("Assets/Images/logo2.jpeg"),
-                                    radius: 50,
-                                  ),
-                                ],
-                              ),
-                              const Padding(padding: EdgeInsets.all(8)),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  //Padding(padding: EdgeInsets.only(top: 80)),
-                                  Text(
-                                    '${item.nombre}',
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Barlow',
-                                        fontSize: 20),
-                                  ),
-                                ],
-                              ),
-                            ],
+                      return FadeInLeft(
+                        delay: Duration(milliseconds: 100 * index),
+                        child: Card(
+                          color: Colors.transparent,
+                          elevation: 1,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                servicioSeleccionado = item.nombre;
+                              });
+                            },
+                            child: Column(
+                              children: [
+                                //const Padding(padding: EdgeInsets.all(8)),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    CircleAvatar(
+                                      backgroundImage: AssetImage(
+                                          "Assets/Images/logo2.jpeg"),
+                                      radius: 50,
+                                    ),
+                                  ],
+                                ),
+                                const Padding(padding: EdgeInsets.all(8)),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    //Padding(padding: EdgeInsets.only(top: 80)),
+                                    Text(
+                                      '${item.nombre}',
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Barlow',
+                                          fontSize: 20),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -280,38 +284,41 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     final _barber = _barbers.elementAt(index);
                     return SizedBox(
                       height: 67,
-                      child: ListTile(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        leading: const Icon(
-                          Icons.person,
-                          color: Colors.white70,
-                          size: 50,
-                        ),
-                        title: Text(
-                          '${_barber.nombre}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Barlow',
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
+                      child: FadeInLeft(
+                        delay: Duration(milliseconds: 100 * index),
+                        child: ListTile(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                        ),
-                        subtitle: Text(
-                          '${_barber.descripcion}',
-                          style: const TextStyle(
+                          leading: const Icon(
+                            Icons.person,
+                            color: Colors.white70,
+                            size: 50,
+                          ),
+                          title: Text(
+                            '${_barber.nombre}',
+                            style: const TextStyle(
                               color: Colors.white,
                               fontFamily: 'Barlow',
-                              fontSize: 20),
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text(
+                            '${_barber.descripcion}',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Barlow',
+                                fontSize: 20),
+                          ),
+                          isThreeLine: true,
+                          onTap: () {
+                            //print(_barber.nombre);
+                            setState(() {
+                              barberoSeleccionado = _barber.nombre;
+                            });
+                          },
                         ),
-                        isThreeLine: true,
-                        onTap: () {
-                          print(_barber.nombre);
-                          setState(() {
-                            barberoSeleccionado = _barber.nombre;
-                          });
-                        },
                       ),
                     );
                   },
@@ -375,6 +382,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                             barberoSeleccionado: barberoSeleccionado,
                             fecha: fecha,
                             servicioSeleccionado: servicioSeleccionado,
+                            clienteDesdeSeleccionDeCita: _user.displayName!,
+                            servicioDesdeSeleccionDeCita: servicioSeleccionado,
                           ),
                         ),
                       );
@@ -408,7 +417,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
       // SI NO ESTA VACIO VA IMPRIMIR Y CAMBIA EL FLAG A TRUE, PARA QUE PINTE LAS HORAS
 
       for (var doc in query.docs) {
-        print({doc['Fecha'] + ' ' + doc['Hora'] + ' ' + doc['Barbero']});
+        //print({doc['Fecha'] + ' ' + doc['Hora'] + ' ' + doc['Barbero']});
       }
       existInfo = true;
     } else {
