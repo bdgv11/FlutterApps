@@ -14,7 +14,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 class AppointmentScreen extends StatefulWidget {
   final User user;
-  const AppointmentScreen({required this.user});
+  const AppointmentScreen({super.key, required this.user});
 
   @override
   State<AppointmentScreen> createState() => _AppointmentScreenState();
@@ -25,7 +25,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 
   late User _user;
   DateTime today = DateTime.now();
-  void _FocusDaySelected(DateTime day, DateTime focusedDay) {
+  void _focusDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
       today = day;
     });
@@ -125,7 +125,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   lastDay: DateTime.now().add(const Duration(days: 60)),
                   startingDayOfWeek: StartingDayOfWeek.monday,
                   locale: 'es_ES',
-                  onDaySelected: _FocusDaySelected,
+                  onDaySelected: _focusDaySelected,
                   calendarFormat: CalendarFormat.twoWeeks,
                   weekendDays: const <int>[DateTime.sunday],
                   //Header Style
@@ -281,7 +281,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   shrinkWrap: true,
                   itemCount: _barbers.length,
                   itemBuilder: (context, index) {
-                    final _barber = _barbers.elementAt(index);
+                    final barber = _barbers.elementAt(index);
                     return SizedBox(
                       height: 67,
                       child: FadeInLeft(
@@ -296,7 +296,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                             size: 50,
                           ),
                           title: Text(
-                            '${_barber.nombre}',
+                            '${barber.nombre}',
                             style: const TextStyle(
                               color: Colors.white,
                               fontFamily: 'Barlow',
@@ -305,7 +305,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                             ),
                           ),
                           subtitle: Text(
-                            '${_barber.descripcion}',
+                            '${barber.descripcion}',
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'Barlow',
@@ -314,7 +314,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                           isThreeLine: true,
                           onTap: () {
                             setState(() {
-                              barberoSeleccionado = _barber.nombre;
+                              barberoSeleccionado = barber.nombre;
                               getInfo(fecha, barberoSeleccionado);
                             });
                           },
@@ -350,7 +350,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                 const Padding(padding: EdgeInsets.all(8)),
 
                 fullDay
-                    ? full_day()
+                    ? const FullDayWidget()
                     : FutureBuilder(
                         future: Firebase.initializeApp(),
                         builder: (context, snapshot) {
@@ -414,22 +414,19 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
       /*for (var doc in query.docs) {
         //print({doc['Fecha'] + ' ' + doc['Hora'] + ' ' + doc['Barbero']});
       }*/
-
-      //Test
       existInfo = true;
       fullDay = false;
     } else if (queryFullDay.docs.isNotEmpty) {
       fullDay = true;
     } else {
-      print('OJO - Agregando las horas');
       CollectionMethods().addHours(
           barberoSeleccionado, _user.displayName!, fecha, servicioSeleccionado);
     }
   }
 }
 
-class full_day extends StatelessWidget {
-  const full_day({
+class FullDayWidget extends StatelessWidget {
+  const FullDayWidget({
     Key? key,
   }) : super(key: key);
 

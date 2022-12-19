@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class DrawerUserWidget extends StatefulWidget {
   final User user;
-  const DrawerUserWidget({required this.user});
+  const DrawerUserWidget({super.key, required this.user});
 
   @override
   State<DrawerUserWidget> createState() => _DrawerUserWidgetState();
@@ -69,7 +69,7 @@ class _DrawerUserWidgetState extends State<DrawerUserWidget> {
               ),
             ),
           ),
-          Divider(),
+          const Divider(),
           const ListTile(
             leading: Icon(
               Icons.history,
@@ -84,7 +84,7 @@ class _DrawerUserWidgetState extends State<DrawerUserWidget> {
               ),
             ),
           ),
-          Divider(),
+          const Divider(),
           ListTile(
             leading: const Icon(
               Icons.logout_outlined,
@@ -107,7 +107,7 @@ class _DrawerUserWidgetState extends State<DrawerUserWidget> {
               );
             },
           ),
-          Divider(),
+          const Divider(),
         ],
       ),
     );

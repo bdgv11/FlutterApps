@@ -1,15 +1,13 @@
 import 'package:barber/feature_appointment/widgets/hour_item.dart';
 import 'package:barber/firebase/connection_error.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
+// ignore: must_be_immutable
 class HorasWidget extends StatelessWidget {
   HorasWidget(
-      {required this.barberoSeleccionado,
+      {super.key,
+      required this.barberoSeleccionado,
       required this.fecha,
       required this.servicioSeleccionado,
       required this.clienteDesdeSeleccionDeCita,
@@ -32,12 +30,11 @@ class HorasWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int count = 0;
     return StreamBuilder(
       stream: getStream(),
       builder: (context, horas) {
         if (horas.hasError) {
-          return ConnectionError();
+          return const ConnectionError();
         }
         if (horas.hasData) {
           final data = horas.data;
@@ -54,7 +51,7 @@ class HorasWidget extends StatelessWidget {
             );
           }
         }
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       },
     );
   }

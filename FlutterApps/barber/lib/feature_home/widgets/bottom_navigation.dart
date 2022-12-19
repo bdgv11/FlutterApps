@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class BottomNavigationWidget extends StatefulWidget {
   final User user;
 
-  const BottomNavigationWidget({required this.user});
+  const BottomNavigationWidget({super.key, required this.user});
 
   @override
   State<BottomNavigationWidget> createState() => _BottomNavigationWidgetState();
@@ -33,7 +33,6 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
       onTap: (value) {
         setState(() {
           _currentIndex = value;
-          print('Usuario conectado ${_user.displayName}');
         });
 
         if (_currentIndex == 0) {

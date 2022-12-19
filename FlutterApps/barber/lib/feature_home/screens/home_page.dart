@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class HomePageScreen extends StatefulWidget {
   final User user;
-  const HomePageScreen({required this.user});
+  const HomePageScreen({super.key, required this.user});
 
   @override
   State<HomePageScreen> createState() => _MyWidgetState();

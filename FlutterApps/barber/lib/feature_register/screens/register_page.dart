@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
@@ -18,7 +20,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final _focusName = FocusNode();
   final _focusEmail = FocusNode();
-  final _focusPhone = FocusNode();
   final _focusPassword = FocusNode();
 
   final _formKey = GlobalKey<FormState>();
@@ -225,7 +226,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => LoginBarberShop(),
+                              builder: (context) => const LoginBarberShop(),
                             ),
                           );
                         },

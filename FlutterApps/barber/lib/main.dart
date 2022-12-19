@@ -1,6 +1,5 @@
 /// It returns a MaterialApp widget that has a title, a home, and a debugShowCheckedModeBanner
 import 'package:barber/feature_login/screens/login_barber_shop.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

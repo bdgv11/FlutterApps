@@ -1,25 +1,25 @@
 import 'dart:io';
 
-import 'package:barber/feature_appointment/screens/appointment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HourItem extends StatelessWidget {
   //
-  String barbero;
-  String cliente;
-  String fecha;
-  String hora;
-  bool horaDisponible;
-  String tipoServicio;
-  bool diaDisponible;
-  QueryDocumentSnapshot _snapshot;
-  String clienteDesdeSeleccionDeCita;
-  String servicioDesdeSeleccionDeCita;
+  final String barbero;
+  final String cliente;
+  final String fecha;
+  final String hora;
+  final bool horaDisponible;
+  final String tipoServicio;
+  final bool diaDisponible;
+  final QueryDocumentSnapshot _snapshot;
+  final String clienteDesdeSeleccionDeCita;
+  final String servicioDesdeSeleccionDeCita;
 
   HourItem(this._snapshot, this.clienteDesdeSeleccionDeCita,
-      this.servicioDesdeSeleccionDeCita)
+      this.servicioDesdeSeleccionDeCita,
+      {super.key})
       : barbero = _snapshot.get('Barbero') as String,
         cliente = _snapshot.get('Cliente') as String,
         fecha = _snapshot.get('Fecha') as String,
@@ -55,7 +55,7 @@ class HourItem extends StatelessWidget {
           );
         },
         child: Text(
-          '$hora',
+          hora,
           style: const TextStyle(
               color: Colors.black,
               fontFamily: 'Barlow',
@@ -92,12 +92,10 @@ class HourItem extends StatelessWidget {
             _updateHour();
             Navigator.of(context).pop();
           },
-          child: Container(
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Agendar',
-              ),
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Agendar',
             ),
           ),
         ),
@@ -132,12 +130,10 @@ class HourItem extends StatelessWidget {
             _updateHour();
             Navigator.of(context).pop();
           },
-          child: Container(
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Agendar',
-              ),
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Agendar',
             ),
           ),
         ),

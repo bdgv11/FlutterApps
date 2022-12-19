@@ -139,20 +139,18 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           ),
         ),
       );
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Colors.black,
           duration: Duration(milliseconds: 500),
           content: Text(
-            'No exite ese correo.',
+            'No existe ese correo.',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 25, fontFamily: 'Barlow'),
           ),
         ),
       );
-
-      print(e);
     }
   }
 }
