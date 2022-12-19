@@ -446,6 +446,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
       /*for (var doc in query.docs) {
         //print({doc['Fecha'] + ' ' + doc['Hora'] + ' ' + doc['Barbero']});
       }*/
+
+      //Test
       existInfo = true;
       fullDay = false;
     } else if (queryFullDay.docs.isNotEmpty) {
