@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:barber/feature_appointment/firebase_methods/collections_methods.dart';
 import 'package:barber/feature_appointment/models/barbers.dart';
 import 'package:barber/feature_appointment/models/services.dart';
-import 'package:barber/feature_appointment/widgets/hour_item.dart';
 import 'package:barber/feature_appointment/widgets/hours_buttoms_widget.dart';
 import 'package:barber/feature_home/widgets/bottom_navigation.dart';
 import 'package:barber/feature_home/widgets/drawer_widget.dart';
@@ -32,6 +31,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     });
   }
 
+  bool fullDay = false;
   bool existInfo = false;
   String servicioSeleccionado = '';
   String barberoSeleccionado = '';
@@ -313,7 +313,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                           ),
                           isThreeLine: true,
                           onTap: () {
-                            //print(_barber.nombre);
                             setState(() {
                               barberoSeleccionado = _barber.nombre;
                             });
@@ -374,19 +373,43 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     // CONNECTED WITH DATA
                     if (snapshot.connectionState == ConnectionState.done &&
                         snapshot.data.toString() != '[]') {
-                      return Container(
-                        alignment: Alignment.center,
-                        child: SizedBox(
-                          height: 200,
-                          child: HorasWidget(
-                            barberoSeleccionado: barberoSeleccionado,
-                            fecha: fecha,
-                            servicioSeleccionado: servicioSeleccionado,
-                            clienteDesdeSeleccionDeCita: _user.displayName!,
-                            servicioDesdeSeleccionDeCita: servicioSeleccionado,
+                      if (!fullDay) {
+                        return Container(
+                          alignment: Alignment.center,
+                          child: SizedBox(
+                            height: 200,
+                            child: HorasWidget(
+                              barberoSeleccionado: barberoSeleccionado,
+                              fecha: fecha,
+                              servicioSeleccionado: servicioSeleccionado,
+                              clienteDesdeSeleccionDeCita: _user.displayName!,
+                              servicioDesdeSeleccionDeCita:
+                                  servicioSeleccionado,
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                      } else {
+                        return Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.error_outline,
+                                color: Colors.amber,
+                                size: 30,
+                              ),
+                              Text(
+                                'No hay espacio disponible.',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Barlow',
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
                     }
                     return const CircularProgressIndicator();
                   },
@@ -405,22 +428,30 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   void getInfo(String fecha, String barbero) async {
     CollectionReference citas = FirebaseFirestore.instance.collection('Cita');
     QuerySnapshot query = await citas
-        //.where('Fecha', isEqualTo: '${today.day + today.month + today.year}')
         .where('Fecha', isEqualTo: fecha)
-        //.where('Barbero', isEqualTo: barberoSeleccionado)
         .where('Barbero', isEqualTo: barbero)
         .where('HoraDisponible', isEqualTo: true)
         .orderBy('Hora', descending: false)
         .get();
 
-    if (query.docs.isNotEmpty) {
-      // SI NO ESTA VACIO VA IMPRIMIR Y CAMBIA EL FLAG A TRUE, PARA QUE PINTE LAS HORAS
+    QuerySnapshot queryFullDay = await citas
+        .where('Fecha', isEqualTo: fecha)
+        .where('Barbero', isEqualTo: barbero)
+        .where('HoraDisponible', isEqualTo: false)
+        .orderBy('Hora', descending: false)
+        .get();
 
-      for (var doc in query.docs) {
+    if (query.docs.isNotEmpty) {
+      // SI NO ESTA VACIO CAMBIA EL FLAG A TRUE, PARA QUE PINTE LAS HORAS
+      /*for (var doc in query.docs) {
         //print({doc['Fecha'] + ' ' + doc['Hora'] + ' ' + doc['Barbero']});
-      }
+      }*/
       existInfo = true;
+      fullDay = false;
+    } else if (queryFullDay.docs.isNotEmpty) {
+      fullDay = true;
     } else {
+      print('OJO - Agregando las horas');
       CollectionMethods().addHours(
           barberoSeleccionado, _user.displayName!, fecha, servicioSeleccionado);
     }
