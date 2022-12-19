@@ -315,6 +315,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                           onTap: () {
                             setState(() {
                               barberoSeleccionado = _barber.nombre;
+                              getInfo(fecha, barberoSeleccionado);
                             });
                           },
                         ),
@@ -347,73 +348,40 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   color: Colors.white,
                 ),
                 const Padding(padding: EdgeInsets.all(8)),
-                FutureBuilder(
-                  future: Firebase.initializeApp(),
-                  builder: (context, snapshot) {
-                    //ERROR
-                    if (snapshot.hasError) {
-                      return const ConnectionError();
-                    }
 
-                    //CONNECTED BUT WITHOUT DATA
-                    if (_user.displayName!.isNotEmpty &&
-                        barberoSeleccionado.isNotEmpty) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        getInfo(fecha, barberoSeleccionado);
-                        if (!existInfo) {
-                          // Si la bandera es false es xq no hay info para esa fecha-barbero, entonces va agregarlas
-                          String fecha =
-                              "${today.day}/${today.month}/${today.year}";
-                          /*CollectionMethods().addHours(barberoSeleccionado,
-                              _user.displayName!, fecha, servicioSeleccionado);*/
-                        }
-                      }
-                    }
+                fullDay
+                    ? full_day()
+                    : FutureBuilder(
+                        future: Firebase.initializeApp(),
+                        builder: (context, snapshot) {
+                          //ERROR
+                          if (snapshot.hasError) {
+                            return const ConnectionError();
+                          }
 
-                    // CONNECTED WITH DATA
-                    if (snapshot.connectionState == ConnectionState.done &&
-                        snapshot.data.toString() != '[]') {
-                      if (!fullDay) {
-                        return Container(
-                          alignment: Alignment.center,
-                          child: SizedBox(
-                            height: 200,
-                            child: HorasWidget(
-                              barberoSeleccionado: barberoSeleccionado,
-                              fecha: fecha,
-                              servicioSeleccionado: servicioSeleccionado,
-                              clienteDesdeSeleccionDeCita: _user.displayName!,
-                              servicioDesdeSeleccionDeCita:
-                                  servicioSeleccionado,
-                            ),
-                          ),
-                        );
-                      } else {
-                        return Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(
-                                Icons.error_outline,
-                                color: Colors.amber,
-                                size: 30,
+                          // CONNECTED WITH DATA
+                          if (snapshot.connectionState ==
+                                  ConnectionState.done &&
+                              snapshot.data.toString() != '[]') {
+                            return Container(
+                              alignment: Alignment.center,
+                              child: SizedBox(
+                                height: 300,
+                                child: HorasWidget(
+                                  barberoSeleccionado: barberoSeleccionado,
+                                  fecha: fecha,
+                                  servicioSeleccionado: servicioSeleccionado,
+                                  clienteDesdeSeleccionDeCita:
+                                      _user.displayName!,
+                                  servicioDesdeSeleccionDeCita:
+                                      servicioSeleccionado,
+                                ),
                               ),
-                              Text(
-                                'No hay espacio disponible.',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Barlow',
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-                    }
-                    return const CircularProgressIndicator();
-                  },
-                )
+                            );
+                          }
+                          return const CircularProgressIndicator();
+                        },
+                      )
               ],
             ),
           ),
@@ -457,5 +425,35 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
       CollectionMethods().addHours(
           barberoSeleccionado, _user.displayName!, fecha, servicioSeleccionado);
     }
+  }
+}
+
+class full_day extends StatelessWidget {
+  const full_day({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Icon(
+            Icons.error_outline,
+            color: Colors.amber,
+            size: 30,
+          ),
+          Text(
+            'No hay espacio disponible.',
+            style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Barlow',
+                fontSize: 25,
+                fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
   }
 }
