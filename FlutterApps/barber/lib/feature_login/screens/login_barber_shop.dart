@@ -92,7 +92,9 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                   fontWeight: FontWeight.bold,
                                 ),
                                 hintStyle: TextStyle(
-                                    color: Colors.white, fontFamily: 'Barlow'),
+                                    color: Colors.white,
+                                    fontFamily: 'Barlow',
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                             const Padding(padding: EdgeInsets.all(20)),
@@ -109,7 +111,10 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                     color: Colors.teal,
                                     fontWeight: FontWeight.bold),
                                 hintStyle: TextStyle(
-                                    color: Colors.white, fontFamily: 'Barlow'),
+                                  color: Colors.white,
+                                  fontFamily: 'Barlow',
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               obscureText: true,
                             ),
@@ -162,12 +167,14 @@ class _MyWidgetState extends State<LoginBarberShop> {
                                         /// Checking if the user is not null. If the user is not null, it
                                         /// is navigating to the HomePageScreen.
                                         if (user != null) {
+                                          if (!mounted) return;
                                           Navigator.of(context).pushReplacement(
                                               MaterialPageRoute(
                                             builder: (context) =>
                                                 HomePageScreen(user: user),
                                           ));
                                         } else {
+                                          if (!mounted) return;
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             const SnackBar(

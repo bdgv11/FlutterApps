@@ -62,6 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             color: Colors.white,
                             fontSize: 30,
                             fontFamily: 'Barlow',
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         const Padding(padding: EdgeInsets.all(8)),
@@ -180,6 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     });
 
                                     if (user != null) {
+                                      if (!mounted) return;
                                       Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
                                           builder: (context) =>
@@ -187,6 +189,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         ),
                                       );
                                     } else {
+                                      if (!mounted) return;
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         const SnackBar(
