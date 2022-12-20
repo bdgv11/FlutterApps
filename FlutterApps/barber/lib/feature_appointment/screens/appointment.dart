@@ -31,7 +31,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     });
   }
 
-  bool fullDay = false;
   bool existInfo = false;
   String servicioSeleccionado = '';
   String barberoSeleccionado = '';
@@ -349,39 +348,34 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                 ),
                 const Padding(padding: EdgeInsets.all(8)),
 
-                fullDay
-                    ? const FullDayWidget()
-                    : FutureBuilder(
-                        future: Firebase.initializeApp(),
-                        builder: (context, snapshot) {
-                          //ERROR
-                          if (snapshot.hasError) {
-                            return const ConnectionError();
-                          }
+                FutureBuilder(
+                  future: Firebase.initializeApp(),
+                  builder: (context, snapshot) {
+                    //ERROR
+                    if (snapshot.hasError) {
+                      return const ConnectionError();
+                    }
 
-                          // CONNECTED WITH DATA
-                          if (snapshot.connectionState ==
-                                  ConnectionState.done &&
-                              snapshot.data.toString() != '[]') {
-                            return Container(
-                              alignment: Alignment.center,
-                              child: SizedBox(
-                                height: 300,
-                                child: HorasWidget(
-                                  barberoSeleccionado: barberoSeleccionado,
-                                  fecha: fecha,
-                                  servicioSeleccionado: servicioSeleccionado,
-                                  clienteDesdeSeleccionDeCita:
-                                      _user.displayName!,
-                                  servicioDesdeSeleccionDeCita:
-                                      servicioSeleccionado,
-                                ),
-                              ),
-                            );
-                          }
-                          return const CircularProgressIndicator();
-                        },
-                      )
+                    // CONNECTED WITH DATA
+                    if (snapshot.connectionState == ConnectionState.done &&
+                        snapshot.data.toString() != '[]') {
+                      return Container(
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                          height: 300,
+                          child: HorasWidget(
+                            barberoSeleccionado: barberoSeleccionado,
+                            fecha: fecha,
+                            servicioSeleccionado: servicioSeleccionado,
+                            clienteDesdeSeleccionDeCita: _user.displayName!,
+                            servicioDesdeSeleccionDeCita: servicioSeleccionado,
+                          ),
+                        ),
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                )
               ],
             ),
           ),
@@ -398,14 +392,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     QuerySnapshot query = await citas
         .where('Fecha', isEqualTo: fecha)
         .where('Barbero', isEqualTo: barbero)
-        .where('HoraDisponible', isEqualTo: true)
-        .orderBy('Hora', descending: false)
-        .get();
-
-    QuerySnapshot queryFullDay = await citas
-        .where('Fecha', isEqualTo: fecha)
-        .where('Barbero', isEqualTo: barbero)
-        .where('HoraDisponible', isEqualTo: false)
         .orderBy('Hora', descending: false)
         .get();
 
@@ -415,42 +401,9 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         //print({doc['Fecha'] + ' ' + doc['Hora'] + ' ' + doc['Barbero']});
       }*/
       existInfo = true;
-      fullDay = false;
-    } else if (queryFullDay.docs.isNotEmpty) {
-      fullDay = true;
     } else {
       CollectionMethods().addHours(
           barberoSeleccionado, _user.displayName!, fecha, servicioSeleccionado);
     }
-  }
-}
-
-class FullDayWidget extends StatelessWidget {
-  const FullDayWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Icon(
-            Icons.error_outline,
-            color: Colors.amber,
-            size: 30,
-          ),
-          Text(
-            'No hay espacio disponible.',
-            style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Barlow',
-                fontSize: 25,
-                fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
-    );
   }
 }

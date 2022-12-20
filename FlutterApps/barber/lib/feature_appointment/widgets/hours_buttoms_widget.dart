@@ -23,7 +23,6 @@ class HorasWidget extends StatelessWidget {
       .collection("Cita")
       .where('Fecha', isEqualTo: fecha)
       .where('Barbero', isEqualTo: barberoSeleccionado)
-      .where('HoraDisponible', isEqualTo: true)
       .orderBy('Hora', descending: false)
       .limit(9)
       .snapshots();

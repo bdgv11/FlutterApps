@@ -33,37 +33,60 @@ class HourItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          elevation: 30,
-          backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+    if (horaDisponible) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            elevation: 50,
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+          onPressed: () {
+            _hora = hora;
+
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return Platform.isIOS
+                    ? cupertinoDialog(context)
+                    : androidDialog(context);
+              },
+            );
+          },
+          child: Text(
+            hora,
+            style: const TextStyle(
+                color: Colors.black,
+                fontFamily: 'Barlow',
+                fontWeight: FontWeight.bold),
           ),
         ),
-        onPressed: () {
-          _hora = hora;
-
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return Platform.isIOS
-                  ? cupertinoDialog(context)
-                  : androidDialog(context);
-            },
-          );
-        },
-        child: Text(
-          hora,
-          style: const TextStyle(
-              color: Colors.black,
-              fontFamily: 'Barlow',
-              fontWeight: FontWeight.bold),
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            elevation: 30,
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+          onPressed: null,
+          child: Text(
+            hora,
+            style: const TextStyle(
+                color: Colors.black,
+                fontFamily: 'Barlow',
+                fontWeight: FontWeight.bold),
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   Widget cupertinoDialog(BuildContext context) {
