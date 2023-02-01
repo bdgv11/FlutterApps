@@ -5,11 +5,13 @@ import 'package:lenguajesprogramacion/widgets/customFloatingActionButton.dart';
 import 'package:lenguajesprogramacion/widgets/lenguages_list_view.dart';
 
 void main() {
-  runApp(LanguagesProgramacion());
+  runApp(const LanguagesProgramacion());
 }
 
 class LanguagesProgramacion extends StatelessWidget {
-  late final Future<FirebaseApp> _initialization;
+  //late final Future<FirebaseApp> _initialization;
+
+  const LanguagesProgramacion({super.key});
 
   /*@override
   void initState() {
@@ -26,9 +28,9 @@ class LanguagesProgramacion extends StatelessWidget {
           return MaterialApp(
             home: Scaffold(
               appBar: AppBar(
-                title: Text('Lenguajes de Programacion'),
+                title: const Text('Lenguajes de Programacion'),
               ),
-              body: ConnectionError(),
+              body: const ConnectionError(),
             ),
           );
         }
@@ -37,14 +39,14 @@ class LanguagesProgramacion extends StatelessWidget {
           return MaterialApp(
             home: Scaffold(
               appBar: AppBar(
-                title: Text('Lenguajes de Programacion'),
+                title: const Text('Lenguajes de Programacion'),
               ),
-              body: LenguagesList(),
+              body: const LenguagesList(),
               floatingActionButton: CustomFloatingActionButton(),
             ),
           );
         }
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       },
     );
   }

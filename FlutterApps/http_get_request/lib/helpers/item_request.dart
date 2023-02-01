@@ -9,6 +9,7 @@ class RequestItem implements HTTPRequest<Item> {
   final String url;
   const RequestItem({required this.url});
 
+  @override
   Future<Item> execute() async {
     final response = await http.get(Uri.parse(url));
 

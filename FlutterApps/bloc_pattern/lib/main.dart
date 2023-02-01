@@ -93,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Text(
                     '${snapshot.data}',
-                    style: Theme.of(context).textTheme.headline4,
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ],
               ),
@@ -104,12 +104,11 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Icon(Icons.add),
             ),
           ); // This trailing comma makes auto-formatting nicer for build methods.
-          }
-    );
+        });
   }
 
   @override
-  void dispose(){
+  void dispose() {
     control.dispose();
     super.dispose();
   }

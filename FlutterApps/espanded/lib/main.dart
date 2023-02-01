@@ -59,23 +59,24 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               color: Colors.green,
-              child: Text('A'),
+              child: const Text('A'),
             ),
             Expanded(
+              flex: 1,
               child: Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 color: Colors.yellow,
-                child: Text('B'),
+                child: const Text('B'),
               ),
             ),
             Expanded(
               flex: 2,
               child: Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 color: Colors.redAccent,
-                child: Text('C'),
+                child: const Text('C'),
               ),
             )
           ],

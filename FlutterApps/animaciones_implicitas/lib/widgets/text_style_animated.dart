@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AnimatedTextStyleWidget extends StatelessWidget {
-  const AnimatedTextStyleWidget();
+  const AnimatedTextStyleWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +26,13 @@ class AnimatedTextStyleWidget extends StatelessWidget {
               width: 70,
               color: Colors.red,
               child: AnimatedDefaultTextStyle(
-                duration: Duration(milliseconds: 2500),
+                duration: const Duration(milliseconds: 2500),
                 style: TextStyle(
                     color:
                         status.contador % 2 == 0 ? Colors.white : Colors.purple,
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
-                child: Text('Hola'),
+                child: const Text('Hola'),
               ),
             ),
           ),

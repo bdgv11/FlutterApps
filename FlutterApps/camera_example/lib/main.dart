@@ -52,14 +52,14 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 _onImageButtonPressed(ImageSource.gallery);
               },
-              child: Icon(Icons.photo_library),
+              child: const Icon(Icons.photo_library),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton(
               backgroundColor: Colors.green,
-              child: Icon(Icons.photo_camera),
+              child: const Icon(Icons.photo_camera),
               onPressed: () {
                 _onImageButtonPressed(ImageSource.camera);
               },
@@ -81,12 +81,11 @@ class _MyHomePageState extends State<MyHomePage> {
         textAlign: TextAlign.center,
       );
     } else {
-      return Text(
+      return const Text(
         'No hay imagen',
         textAlign: TextAlign.center,
       );
     }
-    return Container();
   }
 
   void _onImageButtonPressed(ImageSource source) async {

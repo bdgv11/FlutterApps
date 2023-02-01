@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class LanguajeItem extends StatelessWidget {
@@ -8,7 +7,7 @@ class LanguajeItem extends StatelessWidget {
   final String imagen;
   final QueryDocumentSnapshot _snapshot;
 
-  LanguajeItem(this._snapshot)
+  LanguajeItem(this._snapshot, {super.key})
       : nombre = _snapshot.get('nombre') as String,
         votos = _snapshot.get('votos') as int,
         imagen = _snapshot.get('imagen') as String;
@@ -17,8 +16,8 @@ class LanguajeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Image.asset('assets/Images/$imagen'),
-      title: Text('$nombre'),
-      subtitle: Text('El numero de votos es: ${votos}'),
+      title: Text(nombre),
+      subtitle: Text('El numero de votos es: $votos'),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -34,7 +33,7 @@ class LanguajeItem extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text('Seguro que quieres borrar ${nombre} ??'),
+                    title: Text('Seguro que quieres borrar $nombre ??'),
                     actions: [
                       TextButton(
                         onPressed: () {

@@ -19,9 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       home: ChangeNotifierProvider(
         create: (_) => ContadorProvider(0),
-        child: MyHomePage(
-            title: 'Provider App'
-        ),
+        child: const MyHomePage(title: 'Provider App'),
       ),
     );
   }
@@ -34,8 +32,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final _counterProvider = Provider.of<ContadorProvider>(context);
+    final counterProvider = Provider.of<ContadorProvider>(context);
 
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -73,14 +70,14 @@ class MyHomePage extends StatelessWidget {
               'You have pushed the button this many times:',
             ),
             Text(
-              '${_counterProvider.contador}',
-              style: Theme.of(context).textTheme.headline4,
+              '${counterProvider.contador}',
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _counterProvider.increment,
+        onPressed: counterProvider.increment,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

@@ -1,5 +1,3 @@
-import 'package:animaciones_implicitas/widgets/animated_align_widget.dart';
-import 'package:animaciones_implicitas/widgets/animated_container_widget2.dart';
 import 'package:animaciones_implicitas/widgets/increment_widget.dart';
 import 'package:animaciones_implicitas/widgets/text_style_animated.dart';
 import 'package:flutter/material.dart';

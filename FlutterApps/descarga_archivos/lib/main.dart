@@ -17,10 +17,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         home: Scaffold(
           appBar: AppBar(
-            title: Text('Descarga de PDF'),
+            title: const Text('Descarga de PDF'),
           ),
-          body: Center(
-            child: const DownloadWidget(),
+          body: const Center(
+            child: DownloadWidget(),
           ),
         ),
       ),

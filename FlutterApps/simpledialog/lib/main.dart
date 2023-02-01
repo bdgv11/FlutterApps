@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -78,52 +77,43 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> _elegirOpcion() async {
     switch (await showDialog(
-      barrierDismissible: true,
+        barrierDismissible: true,
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
             title: Text('Seleccionar una opcion de transporte'),
             children: [
               SimpleDialogOption(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Icon(Icons.directions_car),
-                    Text(' Auto')
-                  ],
-                ),
-                  onPressed: (){
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: const [Icon(Icons.directions_car), Text(' Auto')],
+                  ),
+                  onPressed: () {
                     Navigator.pop(context, listaOpciones.Auto);
-                  }
-              ),
+                  }),
               SimpleDialogOption(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Icon(Icons.airplanemode_on),
-                    Text(' Avion')
-                  ],
-                ),
-                  onPressed: (){
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: const [
+                      Icon(Icons.airplanemode_on),
+                      Text(' Avion')
+                    ],
+                  ),
+                  onPressed: () {
                     Navigator.pop(context, listaOpciones.Avion);
-                  }
-              ),
+                  }),
               SimpleDialogOption(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Icon(Icons.directions_boat),
-                    Text(' Barco')
-                  ],
+                  children: const [Icon(Icons.directions_boat), Text(' Barco')],
                 ),
-                onPressed: (){
+                onPressed: () {
                   Navigator.pop(context, listaOpciones.Barco);
                 },
               )
             ],
           );
-        }))
-    {
+        })) {
       case listaOpciones.Auto:
         opcionElegida('Auto');
         break;
@@ -138,12 +128,11 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  void opcionElegida(String opcion){
+  void opcionElegida(String opcion) {
     setState(() {
       _opcion = opcion;
     });
   }
 }
-
 
 enum listaOpciones { Auto, Avion, Barco }

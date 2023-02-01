@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment
                 .start, // la primera columna tiene todo su contenido ordenado
-            children: [
+            children: const [
               Icon(Icons.home, color: Colors.amber),
               Icon(Icons.supervised_user_circle, color: Colors.amber),
               Icon(Icons.card_travel, color: Colors.amber),
@@ -68,10 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Icon(Icons.ice_skating, color: Colors.amber)
             ],
           ),
+          const Divider(
+            color: Colors.black,
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment
                 .center, // la primera columna tiene todo su contenido ordenado
-            children: [
+            children: const [
               Icon(Icons.home, color: Colors.purple),
               Icon(Icons.supervised_user_circle, color: Colors.purple),
               Icon(Icons.card_travel, color: Colors.purple),
@@ -79,10 +82,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Icon(Icons.ice_skating, color: Colors.purple)
             ],
           ),
+          const Divider(
+            color: Colors.black,
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment
                 .end, // la primera columna tiene todo su contenido ordenado
-            children: [
+            children: const [
               Icon(Icons.home, color: Colors.green),
               Icon(Icons.supervised_user_circle, color: Colors.green),
               Icon(Icons.card_travel, color: Colors.green),
@@ -93,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment
                 .spaceEvenly, // divide el espacio con el margen
-            children: [
+            children: const [
               Icon(Icons.home, color: Colors.blue),
               Icon(Icons.supervised_user_circle, color: Colors.blue),
               Icon(Icons.card_travel, color: Colors.blue),
@@ -101,10 +107,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Icon(Icons.ice_skating, color: Colors.blue)
             ],
           ),
+          const Divider(
+            color: Colors.black,
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment
                 .spaceAround, // tienen las mismas distancia entre ellos pero deja un poco menos enel margen
-            children: [
+            children: const [
               Icon(Icons.home, color: Colors.red),
               Icon(Icons.supervised_user_circle, color: Colors.red),
               Icon(Icons.card_travel, color: Colors.red),
@@ -112,10 +121,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Icon(Icons.ice_skating, color: Colors.red)
             ],
           ),
+          const Divider(
+            color: Colors.black,
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment
                 .spaceBetween, // no deja espacio ninguno con los margenes
-            children: [
+            children: const [
               Icon(Icons.home, color: Colors.black26),
               Icon(Icons.supervised_user_circle, color: Colors.black26),
               Icon(Icons.card_travel, color: Colors.black26),

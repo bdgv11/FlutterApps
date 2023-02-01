@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AnimatedContainerWidget extends StatelessWidget {
-  const AnimatedContainerWidget();
+  const AnimatedContainerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class AnimatedContainerWidget extends StatelessWidget {
           width: status.contador,
           color: Colors.lightBlue,
           alignment: Alignment.center,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         );
       },
     );

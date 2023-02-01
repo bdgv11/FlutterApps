@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -49,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 15),
+      duration: const Duration(seconds: 15),
     )..repeat();
   }
 

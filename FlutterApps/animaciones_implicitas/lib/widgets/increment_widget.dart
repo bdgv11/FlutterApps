@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class IncrementWidget extends StatelessWidget {
-  const IncrementWidget();
+  const IncrementWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Consumer<ContadorProvider>(
       builder: (context, status, _) {
         return FloatingActionButton(
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () {
             status.increment();
           },

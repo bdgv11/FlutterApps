@@ -17,7 +17,7 @@ class DownloadProgress with ChangeNotifier {
     _reset();
 
     final directories = await getExternalStorageDirectory();
-    final finalPath = directories!.path + '/' + fileNamePath;
+    final finalPath = '${directories!.path}/' + fileNamePath;
 
     print(finalPath);
 

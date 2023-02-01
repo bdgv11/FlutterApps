@@ -40,7 +40,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List _comidas = [
+  final List _comidas = [
     Comida('Ensalada 1', 'Entrante', Image.asset('Assets/Images/Imagen1.jpeg')),
     Comida('Buffet', 'Entrante', Image.asset('Assets/Images/Imagen2.jpeg')),
     Comida('Carne', 'Entrante', Image.asset('Assets/Images/Imagen3.jpeg')),
@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       content: Text(
                         '${item.nombre} ha sido borrado',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 25, fontWeight: FontWeight.bold),
                       )),
                 );

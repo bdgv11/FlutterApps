@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Authentication',
       theme: ThemeData(primarySwatch: Colors.lightGreen),
-      home: LoginScreen(),
+      home: const LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

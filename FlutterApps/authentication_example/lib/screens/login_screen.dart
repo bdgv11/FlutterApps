@@ -5,9 +5,10 @@ import 'package:authentication_example/utils/validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:authentication_example/screens/user_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -87,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     /// A ternary operator. It is a shorthand for an if-else statement.
                     _processing
-                        ? CircularProgressIndicator()
+                        ? const CircularProgressIndicator()
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -135,11 +136,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   onPressed: () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (context) => RegisterScreen(),
+                                        builder: (context) =>
+                                            const RegisterScreen(),
                                       ),
                                     );
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     'Register',
                                     style: TextStyle(color: Colors.white),
                                   ),

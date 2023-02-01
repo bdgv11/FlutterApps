@@ -6,7 +6,7 @@ class DownloadWidget extends StatelessWidget {
   final String url =
       'https://luisgarciamillan.es/wp-content/uploads/2021/01/Sistemas-de-Telecomunicaci%C3%B3n.pdf';
 
-  const DownloadWidget();
+  const DownloadWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -31,7 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Location _location = Location();
+  final Location _location = Location();
   LocationData? _locationData;
 
   @override
@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           children: [
-            Text('Posicion actual'),
+            const Text('Posicion actual'),
             Text(
               _locationData == null
                   ? 'No hay localizacion'

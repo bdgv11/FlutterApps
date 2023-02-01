@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lenguajesprogramacion/widgets/connection_error_widget.dart';
 import 'package:lenguajesprogramacion/widgets/languaje_item_widget.dart';
@@ -12,7 +11,7 @@ class LenguagesList extends StatelessWidget {
       .snapshots();
 
   /// A constructor.
-  const LenguagesList();
+  const LenguagesList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class LenguagesList extends StatelessWidget {
       stream: getStream(),
       builder: (context, languajes) {
         if (languajes.hasError) {
-          return ConnectionError();
+          return const ConnectionError();
         }
         if (languajes.hasData) {
           final data = languajes.data;
@@ -35,7 +34,7 @@ class LenguagesList extends StatelessWidget {
             );
           }
         }
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       },
     );
   }

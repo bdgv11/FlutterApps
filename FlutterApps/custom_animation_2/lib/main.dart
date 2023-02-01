@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 void main() {
   runApp(const MyApp());
@@ -47,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 15),
+      duration: const Duration(seconds: 15),
     );
   }
 
@@ -82,8 +81,8 @@ class _MyHomePageState extends State<MyHomePage>
             );
           },
           child: ElevatedButton(
-            child: Text('Mueveme!'),
             onPressed: _moveMe,
+            child: const Text('Mueveme!'),
           ),
         ),
       ),
@@ -91,7 +90,6 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   void _moveMe() {
-    print(_controller.status);
     if (_controller.status == AnimationStatus.completed) {
       _controller.reverse();
     } else {

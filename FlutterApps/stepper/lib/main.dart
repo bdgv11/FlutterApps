@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -91,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Stepper', style: Theme.of(context).textTheme.headline5),
+            Text('Stepper', style: Theme.of(context).textTheme.headlineSmall),
             Stepper(
               steps: steps,
               currentStep: _currenStep,

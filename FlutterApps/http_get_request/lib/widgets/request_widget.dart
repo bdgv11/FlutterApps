@@ -6,7 +6,7 @@ import 'package:http_get_request/widgets/success_widget.dart';
 
 class HTTPWidget extends StatefulWidget {
   final HTTPRequest<Item> _request;
-  const HTTPWidget(this._request);
+  const HTTPWidget(this._request, {super.key});
 
   @override
   _HTTPWidgetState createState() => _HTTPWidgetState();
@@ -27,12 +27,12 @@ class _HTTPWidgetState extends State<HTTPWidget> {
       future: futureItem,
       builder: (BuildContext context, AsyncSnapshot<Item> snapshot) {
         if (snapshot.hasError) {
-          return ErrorItemWidget();
+          return const ErrorItemWidget();
         }
         if (snapshot.hasData) {
           return SuccessWidget(snapshot.data);
         }
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       },
     );
   }

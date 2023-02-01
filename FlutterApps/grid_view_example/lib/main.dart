@@ -50,7 +50,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List _comidas = [
+  final List _comidas = [
     Comida('Ensalada 1', 'Entrante', Image.asset('Assets/Images/Imagen1.jpeg')),
     Comida('Buffet', 'Entrante', Image.asset('Assets/Images/Imagen2.jpeg')),
     Comida('Carne', 'Entrante', Image.asset('Assets/Images/Imagen3.jpeg')),
@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
           itemCount: _comidas.length,
           itemBuilder: (context, index) {
             final item = _comidas.elementAt(index);
-            return Card(
+            /*return Card(
               color: Colors.cyan,
               elevation: 5,
               child: GestureDetector(
@@ -113,21 +113,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-            );
-            /*return GridTileBar(
+            );*/
+            return GridTileBar(
               backgroundColor: Colors.cyan,
               title: Text(
                 '${item.nombre}',
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
               ),
               subtitle: Container(
-                padding: EdgeInsets.only(top: 8),
+                padding: const EdgeInsets.only(top: 8),
                 child: item.image,
               ),
-            );*/
+            );
           }),
     );
   }

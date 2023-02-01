@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class UserScreen extends StatefulWidget {
   final User user;
 
-  const UserScreen({required this.user});
+  const UserScreen({super.key, required this.user});
 
   @override
   _UserScreenState createState() => _UserScreenState();
@@ -30,7 +30,7 @@ class _UserScreenState extends State<UserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User page'),
+        title: const Text('User page'),
       ),
       body: Center(
         child: Column(
@@ -38,22 +38,22 @@ class _UserScreenState extends State<UserScreen> {
           children: [
             Text(
               'NAME: ${_user.displayName}',
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-            Divider(),
+            const Divider(),
             Text(
               'EMAIL: ${_user.email}',
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
             _user.emailVerified
-                ? Text('Email verificado!',
+                ? const Text('Email verificado!',
                     style: TextStyle(color: Colors.green))
-                : Text('Email NO verificado!',
+                : const Text('Email NO verificado!',
                     style: TextStyle(color: Colors.red)),
             _user.emailVerified
                 ? Container()
                 : _isSendingVerification
-                    ? CircularProgressIndicator()
+                    ? const CircularProgressIndicator()
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -69,12 +69,12 @@ class _UserScreenState extends State<UserScreen> {
                                 _isSendingVerification = false;
                               });
                             },
-                            child: Text('Verificar Email'),
+                            child: const Text('Verificar Email'),
                           ),
                         ],
                       ),
             _isSignInOut
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : ElevatedButton(
                     onPressed: () async {
                       setState(() {
@@ -89,11 +89,11 @@ class _UserScreenState extends State<UserScreen> {
 
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => LoginScreen(),
+                          builder: (context) => const LoginScreen(),
                         ),
                       );
                     },
-                    child: Text('Sign Out!'),
+                    child: const Text('Sign Out!'),
                   ),
           ],
         ),
